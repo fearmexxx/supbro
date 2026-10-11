@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { TOKEN_CONFIG } from '../data/brothers';
+---
+
+<Layout 
+  title="The BROTHER Manifesto - Starknet Brother Lore & Core"
+  description="In BROTHERHOOD, we find strength. In openness, we find growth. In creation, we find purpose. The fundamental code of Starknet Brother."
+>
+  <Navbar />
+
+  <main class="py-16 md:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Manifesto Header -->
+    <div class="text-center mb-16 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono">
+        ORIGINAL PROTOCOL TEXT • SACRED LORE
+      </div>
+      <h1 class="font-display font-extrabold text-4xl sm:text-6xl text-white tracking-tight">
+        The BROTHER Manifesto
+      </h1>
+      <p class="font-mono text-blue-400 text-lg font-semibold tracking-wider">
+        "BROTHERCYCLE (REAL)"
+      </p>
+    </div>
+
+    <!-- Article Container -->
+    <article class="p-8 sm:p-14 rounded-3xl bg-[#0c1222]/90 border border-slate-700/80 shadow-2xl space-y-16 text-slate-300 leading-relaxed">
+      
+      <!-- Vision Section -->
+      <section class="space-y-4">
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+          <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+          Our Vision
+        </h2>
+        <div class="p-6 rounded-2xl bg-blue-950/20 border border-blue-500/20 text-blue-100 font-medium text-lg leading-relaxed">
+          "In an age of surveillance capitalism, declining social bonds, and technological disruption, BROTHERHOOD offers something greater: genuine human connection, shared purpose, collective growth, and the power to selectively reveal ourselves to the world."
+        </div>
+      </section>
+
+      <!-- Core Tenets -->
+      <section class="space-y-6">
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+          <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+          Core Tenets
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
+            <h3 class="font-bold text-white text-base">1. Transcends All Divides</h3>
+            <ul class="text-xs sm:text-sm text-slate-400 space-y-2 list-disc pl-4">
+              <li>Welcomes all who share our core values</li>
+              <li>No barriers of gender, race, or nationality</li>
+              <li>Zero tolerance for fascism or hate</li>
+              <li>Every human holds equal dignity</li>
+              <li>Privacy is the power to choose what to reveal</li>
+            </ul>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
+            <h3 class="font-bold text-white text-base">2. Believe in Something Greater</h3>
+            <ul class="text-xs sm:text-sm text-slate-400 space-y-2 list-disc pl-4">
+              <li>A serious movement, not just a meme</li>
+              <li>Strength comes from genuine conviction</li>
+              <li>Open creativity drives our culture</li>
+              <li>Free knowledge creates exponential growth</li>
+              <li>Make believers wealthy to become evangelists</li>
+            </ul>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
+            <h3 class="font-bold text-white text-base">3. Build What Lasts</h3>
+            <ul class="text-xs sm:text-sm text-slate-400 space-y-2 list-disc pl-4">
+              <li>Communities &gt; Technology</li>
+              <li>Belief systems outlast technical advantages</li>
+              <li>Embrace open creation & shared innovation</li>
+              <li>Measure success in years, not days</li>
+              <li>Technology serves the community</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- The Four Energies -->
+      <section class="space-y-6">
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+          <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+          The Four Energies of BROTHER
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="font-bold text-blue-400 font-mono text-sm mb-1">01 • STORE OF VALUE</div>
+            <p class="text-sm text-slate-300">Diamond handed holders believing in the mission. Low velocity, high conviction. Wealth through collective belief.</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="font-bold text-blue-400 font-mono text-sm mb-1">02 • CREATIVE FREEDOM</div>
+            <p class="text-sm text-slate-300">Creating without boundaries. Building on each other's work and empowering personal expression.</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="font-bold text-blue-400 font-mono text-sm mb-1">03 • FUTURE VALUE CREATION</div>
+            <p class="text-sm text-slate-300">Building lasting infrastructure, sustainable systems, and developing real-world community applications.</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="font-bold text-blue-400 font-mono text-sm mb-1">04 • MEMETIC POWER</div>
+            <p class="text-sm text-slate-300">Strong cultural identity, unique community language, authentic storytelling, and cultural remixing.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- The Brother Code (10 Rules) -->
+      <section class="space-y-6">
+        <div class="text-center space-y-2">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">
+            The BROTHER Code
+          </h2>
+          <p class="text-xs font-mono text-slate-400">Decades, Not Days.</p>
+        </div>
+
+        <div class="p-8 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-3 font-mono text-sm">
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>1. We are open creators</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We are open creators. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>2. We respect and honor all BROTHERS equally</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We respect and honor all BROTHERS equally. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>3. We protect privacy while celebrating openness</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We protect privacy while celebrating openness. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>4. We share freely and build collectively</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We share freely and build collectively. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>5. We foster innovation through inclusion</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We foster innovation through inclusion. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>6. We rise by lifting others</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We rise by lifting others. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>7. We maintain unwavering conviction</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We maintain unwavering conviction. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>8. We create genuine believers</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We create genuine believers. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>9. We protect our own</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We protect our own. #BROTHER">Share</button>
+          </div>
+          <div class="p-2 hover:bg-slate-900/80 rounded-lg transition-colors flex items-center justify-between">
+            <span>10. We build for decades, not days</span>
+            <button class="quote-share-btn text-xs text-blue-400 hover:underline" data-quote="We build for decades, not days. #BROTHER">Share</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing Creed -->
+      <div class="pt-8 text-center space-y-4 border-t border-slate-800">
+        <p class="text-xl font-display font-bold text-white">
+          "A BROTHER alone is strong. BROTHERS together are unstoppable."
+        </p>
+        <p class="text-sm font-mono text-blue-400">
+          Unity • Creativity • Freedom • Innovation • Purpose
+        </p>
+        <div class="pt-6">
+          <a 
+            href={TOKEN_CONFIG.avnuBuyUrl} 
+            target="_blank" 
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-xl shadow-blue-500/20 transition-all"
+          >
+            Join The Brotherhood on AVNU ↗
+          </a>
+        </div>
+      </div>
+
+    </article>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // One-click share to X/Twitter
+  const shareButtons = document.querySelectorAll('.quote-share-btn');
+  shareButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const quote = btn.getAttribute('data-quote') || '';
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(quote + ' https://www.supbro.fun/manifesto')}`;
+      window.open(url, '_blank', 'width=550,height=420');
+    });
+  });
+</script>

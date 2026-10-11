@@ -1,0 +1,144 @@
+---
+import { BROTHERS_LIST } from '../data/brothers';
+const initialBro = BROTHERS_LIST[0]; // Maxx
+---
+
+<section id="hall-of-fame" class="py-24 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono">
+        CORE BROTHERS & LEADERSHIP
+      </div>
+      <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+        BROTHERS HALL OF FAME
+      </h2>
+      <p class="text-base sm:text-lg text-slate-300">
+        The core team, council elders, tech architects, and OGs building and stewarding the Starknet Brother movement.
+      </p>
+    </div>
+
+    <!-- Active Profile Spotlight (Bento Display) -->
+    <div id="spotlight-card" class="mb-16 p-6 sm:p-10 rounded-3xl bg-[#0d1424] border border-slate-700/80 shadow-2xl transition-all duration-300">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        
+        <div class="md:col-span-4 flex justify-center">
+          <div class="relative group">
+            <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500"></div>
+            <img 
+              id="spotlight-image"
+              src={`/brothers/${initialBro.id}.jpeg`} 
+              alt={`Brother ${initialBro.name}`} 
+              class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-2xl object-cover ring-2 ring-blue-500/40 shadow-2xl"
+              onerror="this.src='/image/logo.jpeg'"
+            />
+          </div>
+        </div>
+
+        <div class="md:col-span-8 space-y-4 text-left">
+          <div class="flex flex-wrap items-center gap-3">
+            <h3 id="spotlight-name" class="font-display font-black text-3xl sm:text-4xl text-white">
+              {initialBro.name}
+            </h3>
+            <span id="spotlight-role" class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              {initialBro.role}
+            </span>
+            <span id="spotlight-alias" class="text-xs font-mono px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+              {initialBro.alias}
+            </span>
+          </div>
+
+          <blockquote id="spotlight-quote" class="text-base sm:text-xl font-medium text-slate-200 italic border-l-2 border-blue-500 pl-4 py-1">
+            "{initialBro.quote}"
+          </blockquote>
+
+          <p id="spotlight-description" class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            {initialBro.description}
+          </p>
+
+          <div id="spotlight-tags" class="flex flex-wrap gap-2 pt-2">
+            {initialBro.tags.map(t => (
+              <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 text-xs font-mono text-slate-300 border border-slate-700">#{t}</span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Clean Roster of the 7 Key Brothers -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
+      {BROTHERS_LIST.map((bro, idx) => (
+        <button 
+          type="button"
+          data-bro={JSON.stringify(bro)}
+          class={`brother-avatar-btn group relative flex flex-col items-center p-3 rounded-2xl border transition-all cursor-pointer ${
+            idx === 0 
+              ? 'bg-blue-600/15 border-blue-500 ring-2 ring-blue-500/50 shadow-lg shadow-blue-500/10' 
+              : 'bg-slate-900/60 border-slate-800 hover:border-slate-600 hover:bg-slate-800/60'
+          }`}
+          title={`${bro.name} (${bro.role})`}
+        >
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden mb-2.5 relative shadow">
+            <img 
+              src={`/brothers/${bro.id}.jpeg`} 
+              alt={bro.name}
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              loading="lazy"
+              onerror="this.src='/image/logo.jpeg'"
+            />
+          </div>
+          <span class="text-sm font-display font-bold text-slate-100 group-hover:text-blue-400 transition-colors truncate max-w-full">
+            {bro.name}
+          </span>
+          <span class="text-[11px] font-mono text-blue-400 font-semibold truncate max-w-full mt-0.5">
+            {bro.role}
+          </span>
+        </button>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Interactive Brother Selector Logic
+  const buttons = document.querySelectorAll('.brother-avatar-btn');
+  const spotlightImage = document.getElementById('spotlight-image') as HTMLImageElement;
+  const spotlightName = document.getElementById('spotlight-name');
+  const spotlightAlias = document.getElementById('spotlight-alias');
+  const spotlightRole = document.getElementById('spotlight-role');
+  const spotlightQuote = document.getElementById('spotlight-quote');
+  const spotlightDesc = document.getElementById('spotlight-description');
+  const spotlightTags = document.getElementById('spotlight-tags');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // update active styles
+      buttons.forEach(b => {
+        b.classList.remove('bg-blue-600/15', 'border-blue-500', 'ring-2', 'ring-blue-500/50', 'shadow-lg', 'shadow-blue-500/10');
+        b.classList.add('bg-slate-900/60', 'border-slate-800');
+      });
+      btn.classList.add('bg-blue-600/15', 'border-blue-500', 'ring-2', 'ring-blue-500/50', 'shadow-lg', 'shadow-blue-500/10');
+      btn.classList.remove('bg-slate-900/60', 'border-slate-800');
+
+      const broDataRaw = btn.getAttribute('data-bro');
+      if (broDataRaw) {
+        const bro = JSON.parse(broDataRaw);
+        if (spotlightImage) spotlightImage.src = `/brothers/${bro.id}.jpeg`;
+        if (spotlightName) spotlightName.textContent = bro.name;
+        if (spotlightAlias) spotlightAlias.textContent = bro.alias;
+        if (spotlightRole) spotlightRole.textContent = bro.role;
+        if (spotlightQuote) spotlightQuote.textContent = `"${bro.quote}"`;
+        if (spotlightDesc) spotlightDesc.textContent = bro.description;
+
+        if (spotlightTags && bro.tags) {
+          spotlightTags.innerHTML = bro.tags.map((t: string) => `
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 text-xs font-mono text-slate-300 border border-slate-700">#${t}</span>
+          `).join('');
+        }
+      }
+    });
+  });
+</script>

@@ -1,0 +1,86 @@
+---
+import { TOKEN_CONFIG } from '../data/brothers';
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-[#050811]/75 border-b border-slate-800/80 transition-all">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-xl overflow-hidden ring-2 ring-blue-500/30 group-hover:ring-blue-500 transition-all shadow-lg shadow-blue-500/10">
+        <img 
+          src="/image/logo.jpeg" 
+          alt="Starknet Brother" 
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+          onerror="this.src='/favicon.png'"
+        />
+      </div>
+      <div class="flex flex-col">
+        <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-blue-400 transition-colors">
+          STARKNET BROTHER
+        </span>
+        <span class="text-[10px] font-mono tracking-widest text-blue-400 font-semibold uppercase">
+          $BROTHER • STARKNET
+        </span>
+      </div>
+    </a>
+
+    <!-- Navigation links -->
+    <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-full border border-slate-800">
+      <a href="#about" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
+        About
+      </a>
+      <a href="#hall-of-fame" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
+        Hall of Fame
+      </a>
+      <a href="/manifesto" class="px-4 py-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 rounded-full hover:bg-blue-500/10 transition-all flex items-center gap-1.5">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+        Manifesto
+      </a>
+      <a href="#meme-maker" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
+        Meme Lab
+      </a>
+      <a href="#stats" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
+        Tokenomics
+      </a>
+    </nav>
+
+    <!-- Actions & Wallet -->
+    <div class="flex items-center gap-3">
+      <!-- Live Dex Link -->
+      <a 
+        href={TOKEN_CONFIG.dexScreenerUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800/70 hover:bg-slate-800 px-3 py-2 rounded-xl border border-slate-700/60 transition-all"
+      >
+        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+        <span>Chart</span>
+      </a>
+
+      <!-- Buy CTA Button -->
+      <a 
+        href={TOKEN_CONFIG.avnuBuyUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 px-4 py-2 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-200"
+      >
+        <span>Buy on AVNU</span>
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+
+      <!-- Starknet Wallet Button trigger -->
+      <button 
+        id="wallet-connect-btn"
+        class="inline-flex items-center gap-2 text-xs font-medium text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-blue-500/50 px-3 py-2 rounded-xl transition-all cursor-pointer"
+        title="Connect Starknet Wallet (Argent / Braavos)"
+      >
+        <span class="w-2 h-2 rounded-full bg-slate-500" id="wallet-indicator"></span>
+        <span id="wallet-btn-label">Connect</span>
+      </button>
+    </div>
+  </div>
+</header>
