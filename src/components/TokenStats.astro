@@ -2,173 +2,163 @@
 import { TOKEN_CONFIG } from '../data/brothers';
 ---
 
-<section id="stats" class="py-16 border-y border-slate-800/80 bg-[#070b16]/95 relative overflow-hidden">
-  <!-- Subtle Background Glow -->
-  <div class="absolute -top-40 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[128px] pointer-events-none"></div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<section id="stats" class="max-w-7xl mx-auto px-4 py-8">
+  
+  <!-- Windows 3.1 Styled Performance & Metrics Window -->
+  <div class="win31-window">
     
-    <!-- Header with Live Stream Badges -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-      <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>STARKNET ALPHA ON-CHAIN METRICS</span>
-        </div>
-        <h2 class="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
-          Live Market Pulse & Liquidity
-        </h2>
+    <!-- Titlebar -->
+    <div class="win31-titlebar flex items-center justify-between font-mono-code text-sm">
+      <div class="flex items-center gap-2">
+        <span class="bg-[#c0c0c0] text-[#000000] px-1.5 border border-white text-xs">▼</span>
+        <span>STARKNET_DEX_MONITOR.EXE - [ON-CHAIN TELEMETRY]</span>
       </div>
-
-      <!-- Quick Chart & Explorer Links -->
-      <div class="flex flex-wrap items-center gap-2.5">
-        <a 
-          href={TOKEN_CONFIG.dexScreenerUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="text-xs font-mono px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white transition-all flex items-center gap-2 border border-slate-700/80 shadow-md"
-        >
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>DexScreener</span>
-          <span class="text-[10px] text-slate-400">↗</span>
-        </a>
-
-        <a 
-          href={TOKEN_CONFIG.geckoTerminalUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="text-xs font-mono px-3.5 py-2 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-300 hover:text-emerald-200 transition-all flex items-center gap-2 border border-emerald-500/30 shadow-md"
-        >
-          <span>🦎 GeckoTerminal Pool</span>
-          <span class="text-[10px] text-emerald-400">↗</span>
-        </a>
-
-        <a 
-          href={TOKEN_CONFIG.avnuBuyUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="text-xs font-mono px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all flex items-center gap-1.5 shadow-md shadow-blue-500/20"
-        >
-          <span>Buy on AVNU</span>
-          <span class="text-[10px]">↗</span>
-        </a>
+      <div class="flex items-center gap-1">
+        <button class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 border border-white text-xs font-bold">▲</button>
+        <button class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 border border-white text-xs font-bold">■</button>
       </div>
     </div>
 
-    <!-- Scaled 6-Card Metrics Bento Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <!-- Window Menu Bar -->
+    <div class="bg-[#c0c0c0] border-b border-[#808080] px-3 py-1 flex items-center gap-4 text-xs font-mono-code text-black select-none">
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>F</u>ile</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>E</u>dit</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>S</u>tats</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>P</u>ools</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
+    </div>
+
+    <!-- Window Content Area (DOS Blue Inner Screen) -->
+    <div class="p-4 sm:p-6 bg-[#0000aa] text-white font-mono-code">
       
-      <!-- Metric 1: Price -->
-      <div class="p-5 rounded-2xl bg-[#0d1424] border border-slate-800/80 hover:border-blue-500/40 transition-all flex flex-col justify-between">
-        <div class="text-[11px] font-mono text-slate-400 flex items-center justify-between mb-2">
-          <span>TOKEN PRICE</span>
-          <span class="text-[10px] text-emerald-400 font-bold font-mono" id="ticker-change">+0.00%</span>
-        </div>
+      <!-- Top Status Banner -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#55ffff] pb-3 mb-6 gap-2">
         <div>
-          <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight" id="ticker-price">
+          <div class="text-[#ffff55] font-bold text-base sm:text-lg">
+            STARKNET ALPHA MAINNET TELEMETRY [PORT: 4321]
+          </div>
+          <div class="text-xs text-[#55ffff]">
+            PAIR: $BROTHER / STRK // POOL: 0x00d4cf27867...360a
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <a 
+            href={TOKEN_CONFIG.geckoTerminalUrl} 
+            target="_blank" 
+            class="win31-btn px-3 py-1 text-xs font-bold text-black hover:bg-white flex items-center gap-1 cursor-pointer"
+          >
+            <span>🦎 GeckoTerminal Pool</span>
+            <span>↗</span>
+          </a>
+          <a 
+            href={TOKEN_CONFIG.dexScreenerUrl} 
+            target="_blank" 
+            class="win31-btn px-3 py-1 text-xs font-bold text-black hover:bg-white flex items-center gap-1 cursor-pointer"
+          >
+            <span>📈 DexScreener</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 6 Metrics Retro Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+        
+        <!-- Metric 1: Price -->
+        <div class="bg-[#000080] border-2 border-white p-3 text-center">
+          <div class="text-[10px] text-[#55ffff] font-bold">TOKEN PRICE</div>
+          <div class="text-sm sm:text-base font-bold text-[#ffff55] my-1" id="ticker-price">
             Loading...
           </div>
-          <div class="text-[10px] text-slate-500 mt-1 font-mono">Pair: $BROTHER / STRK</div>
+          <div class="text-[10px] text-[#55ff55] font-bold" id="ticker-change">+0.00% 24H</div>
         </div>
-      </div>
 
-      <!-- Metric 2: 24h Volume -->
-      <div class="p-5 rounded-2xl bg-[#0d1424] border border-slate-800/80 hover:border-blue-500/40 transition-all flex flex-col justify-between">
-        <div class="text-[11px] font-mono text-slate-400 mb-2">24H VOLUME</div>
-        <div>
-          <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight" id="ticker-volume">
+        <!-- Metric 2: Volume -->
+        <div class="bg-[#000080] border-2 border-white p-3 text-center">
+          <div class="text-[10px] text-[#55ffff] font-bold">24H VOLUME</div>
+          <div class="text-sm sm:text-base font-bold text-white my-1" id="ticker-volume">
             $17.8K+
           </div>
-          <div class="text-[10px] text-emerald-400 mt-1 font-mono">Real On-Chain Swaps</div>
+          <div class="text-[10px] text-[#aaaaaa]">ON-CHAIN SWAPS</div>
         </div>
-      </div>
 
-      <!-- Metric 3: Liquidity USD -->
-      <div class="p-5 rounded-2xl bg-[#0d1424] border border-slate-800/80 hover:border-blue-500/40 transition-all flex flex-col justify-between">
-        <div class="text-[11px] font-mono text-slate-400 mb-2">DEX LIQUIDITY</div>
-        <div>
-          <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight" id="ticker-liquidity">
+        <!-- Metric 3: Liquidity -->
+        <div class="bg-[#000080] border-2 border-white p-3 text-center">
+          <div class="text-[10px] text-[#55ffff] font-bold">DEX LIQUIDITY</div>
+          <div class="text-sm sm:text-base font-bold text-[#55ff55] my-1" id="ticker-liquidity">
             $100.8K+
           </div>
-          <div class="text-[10px] text-slate-500 mt-1 font-mono">Deep Starknet Pools</div>
+          <div class="text-[10px] text-[#aaaaaa]">DEEP ALPHA POOL</div>
         </div>
-      </div>
 
-      <!-- Metric 4: Market Cap / FDV -->
-      <div class="p-5 rounded-2xl bg-[#0d1424] border border-slate-800/80 hover:border-blue-500/40 transition-all flex flex-col justify-between">
-        <div class="text-[11px] font-mono text-slate-400 mb-2">MARKET CAP / FDV</div>
-        <div>
-          <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight" id="ticker-mcap">
+        <!-- Metric 4: Market Cap -->
+        <div class="bg-[#000080] border-2 border-white p-3 text-center">
+          <div class="text-[10px] text-[#55ffff] font-bold">MARKET CAP / FDV</div>
+          <div class="text-sm sm:text-base font-bold text-white my-1" id="ticker-mcap">
             $561.4K
           </div>
-          <div class="text-[10px] text-blue-400 mt-1 font-mono">Fully Diluted</div>
+          <div class="text-[10px] text-[#55ffff]">FULLY DILUTED</div>
         </div>
-      </div>
 
-      <!-- Metric 5: Total Supply -->
-      <div class="p-5 rounded-2xl bg-[#0d1424] border border-slate-800/80 hover:border-blue-500/40 transition-all flex flex-col justify-between">
-        <div class="text-[11px] font-mono text-slate-400 mb-2">TOTAL SUPPLY</div>
-        <div>
-          <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">
+        <!-- Metric 5: Total Supply -->
+        <div class="bg-[#000080] border-2 border-white p-3 text-center">
+          <div class="text-[10px] text-[#55ffff] font-bold">TOTAL SUPPLY</div>
+          <div class="text-sm sm:text-base font-bold text-white my-1">
             1,000T
           </div>
-          <div class="text-[10px] text-slate-500 mt-1 font-mono">1 Quadrillion Fixed</div>
+          <div class="text-[10px] text-[#aaaaaa]">FIXED QUADRILLION</div>
         </div>
+
+        <!-- Metric 6: Security Lock -->
+        <div class="bg-[#000080] border-2 border-white p-3 text-center">
+          <div class="text-[10px] text-[#55ffff] font-bold">SAFETY INTEGRITY</div>
+          <div class="text-sm sm:text-base font-bold text-[#55ff55] my-1">
+            🔒 100% LOCKED
+          </div>
+          <div class="text-[10px] text-[#ffff55]">UNRUGGABLE.MEME</div>
+        </div>
+
       </div>
 
-      <!-- Metric 6: Liquidity Lock Status -->
-      <div class="p-5 rounded-2xl bg-[#0d1424] border border-slate-800/80 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
-        <div class="text-[11px] font-mono text-slate-400 mb-2">SAFETY STATUS</div>
-        <div>
-          <div class="text-lg sm:text-xl font-bold font-mono text-emerald-400 flex items-center gap-1">
-            <span>🔒 100% Locked</span>
-          </div>
-          <div class="text-[10px] text-slate-500 mt-1 font-mono">
-            unruggable.meme
-          </div>
+      <!-- Contract Address Tape -->
+      <div class="bg-[#000000] border border-[#55ffff] p-3 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="text-[#ffff55] font-bold">[CONTRACT_ADDR]:</span>
+          <span class="text-white select-all break-all font-mono-code">{TOKEN_CONFIG.contractAddress}</span>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button 
+            id="copy-ca-dos-btn" 
+            data-ca={TOKEN_CONFIG.contractAddress}
+            class="win31-btn px-3 py-1 font-bold text-black hover:bg-white cursor-pointer"
+          >
+            COPY_CA.BAT
+          </button>
+          <a 
+            href={TOKEN_CONFIG.starkscanUrl} 
+            target="_blank" 
+            class="win31-btn px-3 py-1 font-bold text-black hover:bg-white cursor-pointer"
+          >
+            STARKSCAN.EXE ↗
+          </a>
         </div>
       </div>
 
     </div>
 
-    <!-- Official Contract & Verified Explorer Bar -->
-    <div class="mt-6 p-4 rounded-2xl bg-[#0c1220] border border-slate-800/90 flex flex-col lg:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3 w-full lg:w-auto">
-        <div class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-mono font-bold shrink-0">
-          CA
-        </div>
-        <div class="min-w-0">
-          <div class="text-[11px] text-slate-400 font-mono">Official Starknet Contract Address</div>
-          <div class="font-mono text-xs sm:text-sm text-slate-200 select-all truncate">
-            {TOKEN_CONFIG.contractAddress}
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto justify-end">
-        <button 
-          id="copy-ca-btn-stats"
-          data-ca={TOKEN_CONFIG.contractAddress}
-          class="text-xs font-medium px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-blue-400 hover:text-blue-300 transition-all border border-slate-700 cursor-pointer"
-        >
-          Copy CA
-        </button>
-        <a 
-          href={TOKEN_CONFIG.starkscanUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="text-xs font-medium px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700"
-        >
-          Starkscan Explorer ↗
-        </a>
-      </div>
+    <!-- Window Status Bar -->
+    <div class="bg-[#c0c0c0] border-t border-[#ffffff] px-3 py-1 flex items-center justify-between text-xs font-mono-code text-black select-none">
+      <span>Status: 100% UNRUGGABLE // MATHEMATICALLY PROVEN</span>
+      <span>BLOCKCHAIN: STARKNET</span>
     </div>
 
   </div>
+
 </section>
 
 <script>
-  // Real-time market metrics fetch from DexScreener
+  // DexScreener live API telemetry
   async function fetchDexData() {
     try {
       const pairAddress = "0x03b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee";
@@ -189,8 +179,8 @@ import { TOKEN_CONFIG } from '../data/brothers';
         }
         if (changeEl && pair.priceChange && pair.priceChange.h24 !== undefined) {
           const ch = pair.priceChange.h24;
-          changeEl.textContent = `${ch >= 0 ? '+' : ''}${ch}% 24h`;
-          changeEl.className = `text-[10px] font-bold font-mono ${ch >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+          changeEl.textContent = `${ch >= 0 ? '+' : ''}${ch}% 24H`;
+          changeEl.className = `text-[10px] font-bold font-mono-code ${ch >= 0 ? 'text-[#55ff55]' : 'text-[#ff5555]'}`;
         }
         if (mcapEl && (pair.marketCap || pair.fdv)) {
           const mcap = pair.marketCap || pair.fdv;
@@ -204,27 +194,22 @@ import { TOKEN_CONFIG } from '../data/brothers';
         }
       }
     } catch (e) {
-      console.log('DexScreener fetch fallback: ', e);
+      console.log('Telemetry fetch fallback:', e);
     }
   }
 
   fetchDexData();
   setInterval(fetchDexData, 20000);
 
-  // Copy CA button for this section
-  const copyStatsBtn = document.getElementById('copy-ca-btn-stats');
-  if (copyStatsBtn) {
-    copyStatsBtn.addEventListener('click', () => {
-      const ca = copyStatsBtn.getAttribute('data-ca');
-      if (ca) {
-        navigator.clipboard.writeText(ca).then(() => {
-          const orig = copyStatsBtn.textContent;
-          copyStatsBtn.textContent = 'Copied! ✓';
-          setTimeout(() => {
-            copyStatsBtn.textContent = orig;
-          }, 2000);
-        });
-      }
-    });
-  }
+  const copyBtn = document.getElementById('copy-ca-dos-btn');
+  copyBtn?.addEventListener('click', () => {
+    const ca = copyBtn.getAttribute('data-ca');
+    if (ca) {
+      navigator.clipboard.writeText(ca).then(() => {
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = 'COPIED! ✓';
+        setTimeout(() => copyBtn.textContent = orig, 2000);
+      });
+    }
+  });
 </script>

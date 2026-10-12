@@ -2,122 +2,241 @@
 import { TOKEN_CONFIG } from '../data/brothers';
 ---
 
-<section class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<section id="dos-prompt" class="max-w-7xl mx-auto px-4 py-8">
+  
+  <!-- IBM / MS-DOS System Boot Window -->
+  <div class="dos-box p-4 sm:p-6 text-[#ffffff] font-dos text-xl sm:text-2xl leading-snug">
     
-    <!-- Hero Brand Badge / Logo -->
-    <div class="inline-flex flex-col items-center mb-8">
-      <div class="relative group mb-6">
-        <div class="absolute -inset-1.5 bg-gradient-to-r from-blue-600 via-indigo-500 to-sky-500 rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition duration-500"></div>
-        <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-3xl overflow-hidden ring-4 ring-slate-800 shadow-2xl bg-slate-900">
-          <img 
-            src="/image/logo.jpeg" 
-            alt="Starknet Brother Logo" 
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onerror="this.src='/favicon.png'"
-          />
-        </div>
+    <!-- BIOS Header -->
+    <div class="border-b-2 border-[#55ffff] pb-3 mb-4 text-[#55ffff]">
+      <div>BROTHER-BIOS (C) 2024-2026 STARKNET MEME CORP. ALL RIGHTS RESERVED.</div>
+      <div class="text-[#aaaaaa] text-lg">REVOLUTION PROTOCOL: HARDSHIP TO ETERNAL GLORY // CAIRO v2.8.4 KERNEL</div>
+      <div class="text-[#ffff55] text-lg">MEMORY CHECK: 640KB BASE OK // 1,000,000,000,000,000 $BROTHER EXTENDED OK</div>
+    </div>
+
+    <!-- Hardship to Revolution Narrative in ASCII Box -->
+    <div class="bg-[#000080] border border-[#ffffff] p-4 my-4 text-[#ffffff] text-lg sm:text-xl font-mono-code leading-relaxed">
+      <div class="text-[#ffff55] font-bold mb-2">
+        *** SYSTEM TRANSMISSION: THE BROTHER REVOLUTION ***
+      </div>
+      <p class="mb-2 text-[#55ffff]">
+        [YEAR 2024] - THE HARD TIMES:
+        In the depths of surveillance capitalism and brutal crypto winters, brothers held with zero cabal support, sleepless trading nights, and pure unwavering diamond hands.
+      </p>
+      <p class="text-[#55ff55]">
+        [CURRENT ERA] - THE STARKNET REVOLUTION:
+        Today, Starknet leads the world with STARK zero-knowledge proofs. We built $BROTHER not as a short-lived joke, but as a permanent digital brotherhood with 100% locked liquidity on unruggable.meme.
+      </p>
+    </div>
+
+    <!-- Interactive Command Line Shell -->
+    <div class="mt-6 bg-[#000000] border-2 border-[#55ffff] p-4 text-[#55ff55] font-mono-code text-sm sm:text-base">
+      <div class="text-[#aaaaaa] text-xs mb-3">
+        Type <span class="text-[#ffff55]">HELP</span>, <span class="text-[#ffff55]">DIR</span>, <span class="text-[#ffff55]">MANIFESTO</span>, <span class="text-[#ffff55]">BUY</span>, <span class="text-[#ffff55]">ROSTER</span>, <span class="text-[#ffff55]">CONTRACT</span>, or <span class="text-[#ffff55]">CLS</span>
       </div>
 
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-4">
-        <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
-        <span>THE LEADING MEME TOKEN ON STARKNET</span>
+      <!-- Output log -->
+      <div id="cli-output" class="space-y-1 mb-3">
+        <div>C:\BROTHER&gt; SYSTEM BOOT READY. STARKNET REVOLUTION ENGINE LOADED.</div>
+        <div class="text-[#ffff55]">C:\BROTHER&gt; TYPE 'DIR' TO BROWSE REVOLUTION FILES OR USE THE BUTTONS BELOW.</div>
+      </div>
+
+      <!-- Command Input line -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#55ffff] font-bold shrink-0">C:\BROTHER&gt;</span>
+        <input 
+          type="text" 
+          id="cli-input"
+          class="w-full bg-transparent text-[#ffff55] focus:outline-none font-mono-code text-sm sm:text-base uppercase"
+          placeholder="TYPE COMMAND HERE..."
+          autocomplete="off"
+          autofocus
+        />
+        <span class="dos-cursor"></span>
       </div>
     </div>
 
-    <!-- Main Title -->
-    <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[1.08] mb-6">
-      WE ARE <br class="hidden sm:inline"/>
-      <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400 bg-clip-text text-transparent">
-        STARKNET BROTHERS
-      </span>
-    </h1>
-
-    <!-- Subtitle -->
-    <p class="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mb-10">
-      Built on Starknet, powered by brothers, and ready to take on the meme world! 
-      Get in, hold tight, and let’s see where this wild ride takes us.
-    </p>
-
-    <!-- CTAs -->
-    <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
-      <a 
-        href={TOKEN_CONFIG.avnuBuyUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-xl shadow-blue-600/30 hover:shadow-blue-600/50 transition-all flex items-center gap-2.5 group"
+    <!-- Quick Tool Bar / Floppy Action Buttons -->
+    <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+      <button 
+        type="button" 
+        data-cmd="BUY"
+        class="quick-cmd-btn win31-btn p-2.5 text-center font-bold font-mono-code text-xs sm:text-sm flex flex-col items-center gap-1 cursor-pointer"
       >
-        <span>Buy $BROTHER on AVNU</span>
-        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+        <span class="text-xl">💾</span>
+        <span>BUY_AVNU.SYS</span>
+      </button>
 
-      <a 
-        href="/manifesto" 
-        class="px-8 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-sm border border-slate-700/80 hover:border-slate-600 transition-all flex items-center gap-2"
+      <button 
+        type="button" 
+        data-cmd="MANIFESTO"
+        class="quick-cmd-btn win31-btn p-2.5 text-center font-bold font-mono-code text-xs sm:text-sm flex flex-col items-center gap-1 cursor-pointer"
       >
-        <svg class="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-        <span>The Brother Manifesto</span>
-      </a>
+        <span class="text-xl">📄</span>
+        <span>MANIFESTO.TXT</span>
+      </button>
 
-      <a 
-        href={TOKEN_CONFIG.dexScreenerUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="px-6 py-4 rounded-2xl bg-slate-900/60 hover:bg-slate-800 text-slate-400 hover:text-white font-medium text-sm border border-slate-800 transition-all flex items-center gap-2"
+      <button 
+        type="button" 
+        data-cmd="ROSTER"
+        class="quick-cmd-btn win31-btn p-2.5 text-center font-bold font-mono-code text-xs sm:text-sm flex flex-col items-center gap-1 cursor-pointer"
       >
-        <span>Live Chart</span>
-        <span class="text-xs text-slate-500">↗</span>
-      </a>
-    </div>
+        <span class="text-xl">👥</span>
+        <span>ROSTER.EXE</span>
+      </button>
 
-    <!-- Contract Quick Bar -->
-    <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
-      <div class="inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-400 shadow-lg">
-        <span class="text-slate-500 font-semibold">CA:</span>
-        <span class="text-slate-300 font-semibold tracking-wide">
-          {TOKEN_CONFIG.contractAddress.slice(0, 10)}...{TOKEN_CONFIG.contractAddress.slice(-8)}
-        </span>
-        <button 
-          id="copy-ca-btn"
-          data-ca={TOKEN_CONFIG.contractAddress}
-          class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs font-sans transition-all cursor-pointer"
-        >
-          Copy
-        </button>
-      </div>
+      <button 
+        type="button" 
+        data-cmd="MEME"
+        class="quick-cmd-btn win31-btn p-2.5 text-center font-bold font-mono-code text-xs sm:text-sm flex flex-col items-center gap-1 cursor-pointer"
+      >
+        <span class="text-xl">🎨</span>
+        <span>PAINT_MEME.EXE</span>
+      </button>
 
-      <span class="text-xs text-emerald-400 flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 font-mono">
-        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-        Liquidity 100% Locked
-      </span>
+      <button 
+        type="button" 
+        data-cmd="GECKO"
+        class="quick-cmd-btn win31-btn p-2.5 text-center font-bold font-mono-code text-xs sm:text-sm flex flex-col items-center gap-1 cursor-pointer"
+      >
+        <span class="text-xl">🦎</span>
+        <span>GECKOTERM.COM</span>
+      </button>
+
+      <button 
+        type="button" 
+        data-cmd="CONTRACT"
+        class="quick-cmd-btn win31-btn p-2.5 text-center font-bold font-mono-code text-xs sm:text-sm flex flex-col items-center gap-1 cursor-pointer"
+      >
+        <span class="text-xl">📋</span>
+        <span>COPY_CA.BAT</span>
+      </button>
     </div>
 
   </div>
+
 </section>
 
 <script>
-  // Copy Contract Address functionality
-  const copyBtn = document.getElementById('copy-ca-btn');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const ca = copyBtn.getAttribute('data-ca');
-      if (ca) {
-        navigator.clipboard.writeText(ca).then(() => {
-          const original = copyBtn.textContent;
-          copyBtn.textContent = 'Copied! ✓';
-          copyBtn.classList.add('bg-emerald-600', 'text-white');
-          setTimeout(() => {
-            copyBtn.textContent = original;
-            copyBtn.classList.remove('bg-emerald-600', 'text-white');
-          }, 2000);
-        });
-      }
-    });
+  // MS-DOS CLI Logic
+  const cliInput = document.getElementById('cli-input') as HTMLInputElement;
+  const cliOutput = document.getElementById('cli-output');
+  const quickBtns = document.querySelectorAll('.quick-cmd-btn');
+
+  const contractAddress = "0x03b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee";
+
+  function printLine(text: string, colorClass = "text-[#ffffff]") {
+    if (!cliOutput) return;
+    const div = document.createElement('div');
+    div.className = colorClass;
+    div.innerHTML = text;
+    cliOutput.appendChild(div);
+    cliOutput.scrollTop = cliOutput.scrollHeight;
   }
+
+  function handleCommand(cmdRaw: string) {
+    const cmd = cmdRaw.trim().toUpperCase();
+    if (!cmd) return;
+
+    printLine(`C:\\BROTHER&gt; ${cmd}`, "text-[#ffff55]");
+
+    switch (cmd) {
+      case 'HELP':
+        printLine(`AVAILABLE COMMANDS:`, "text-[#55ffff]");
+        printLine(`  DIR           - List directory files and programs`);
+        printLine(`  MANIFESTO     - Open sacred brother lore & tenets`);
+        printLine(`  ROSTER        - View Brothers Hall of Fame`);
+        printLine(`  BUY           - Open Avnu Swap interface`);
+        printLine(`  CHART / GECKO - Open DexScreener & GeckoTerminal`);
+        printLine(`  MEME / PAINT  - Launch 8-bit Meme & PFP Creator`);
+        printLine(`  CONTRACT      - Copy $BROTHER contract address`);
+        printLine(`  HARDSHIP      - Read the revolution back-story`);
+        printLine(`  CLS           - Clear terminal buffer`);
+        break;
+
+      case 'DIR':
+        printLine(` Volume in drive C is BROTHER_REVOLUTION`);
+        printLine(` Directory of C:\\BROTHER`, "text-[#55ffff]");
+        printLine(` MANIFESTO.TXT     2,024  10-31-24  Sacred Creed`);
+        printLine(` ROSTER.EXE       18,000  10-31-24  Core Brothers`);
+        printLine(` BUY_AVNU.SYS      4,321  10-31-24  DEX Protocol`);
+        printLine(` PAINT_MEME.EXE   64,000  10-31-24  Creation Lab`);
+        printLine(` GECKOTERM.COM     1,337  10-31-24  Live Pool`);
+        printLine(` CONTRACT.TXT         66  10-31-24  Starknet Address`);
+        printLine(` HARDSHIP.LOG        640  10-31-24  Historical Struggle`);
+        printLine(`       7 File(s)    90,488 bytes`);
+        printLine(`       1 Dir(s)  1,000,000,000,000,000 bytes free`, "text-[#55ff55]");
+        break;
+
+      case 'MANIFESTO':
+        printLine(`LOADING MANIFESTO.TXT INTO MEMORY...`, "text-[#55ffff]");
+        const manEl = document.getElementById('manifesto');
+        if (manEl) manEl.scrollIntoView({ behavior: 'smooth' });
+        break;
+
+      case 'ROSTER':
+      case 'HALL OF FAME':
+        printLine(`EXECUTING ROSTER.EXE (7 CORE BROTHERS)...`, "text-[#55ffff]");
+        const hofEl = document.getElementById('hall-of-fame');
+        if (hofEl) hofEl.scrollIntoView({ behavior: 'smooth' });
+        break;
+
+      case 'MEME':
+      case 'PAINT':
+        printLine(`INITIALIZING PAINT_MEME.EXE...`, "text-[#55ffff]");
+        const memeEl = document.getElementById('meme-maker');
+        if (memeEl) memeEl.scrollIntoView({ behavior: 'smooth' });
+        break;
+
+      case 'BUY':
+        printLine(`CONNECTING TO AVNU DEX ROUTER...`, "text-[#55ff55]");
+        window.open('https://app.avnu.fi/en?amount=0.1&tokenFrom=0x4718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d&tokenTo=0x3b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee', '_blank');
+        break;
+
+      case 'GECKO':
+      case 'CHART':
+        printLine(`OPENING GECKOTERMINAL ALPHA POOL...`, "text-[#55ff55]");
+        window.open('https://www.geckoterminal.com/starknet-alpha/pools/0x00d4cf27867a524d5da0eb8a9d570506c9db85ee8fce7a90e4c5f8488251360a', '_blank');
+        break;
+
+      case 'CONTRACT':
+      case 'CA':
+        navigator.clipboard.writeText(contractAddress);
+        printLine(`[SUCCESS] CONTRACT ADDRESS COPIED TO CLIPBOARD:`, "text-[#55ff55]");
+        printLine(`&gt;&gt; ${contractAddress}`, "text-[#ffff55]");
+        break;
+
+      case 'HARDSHIP':
+        printLine(`[ARCHIVE LOG: BROTHER HARDSHIP]`, "text-[#55ffff]");
+        printLine(`We endured the era of zero liquidity, predatory VCs, and bear fatigue.`);
+        printLine(`Brothers banded together on Starknet. No cabal. Just conviction.`);
+        printLine(`The revolution has arrived: BROTHERCYCLE (REAL).`, "text-[#ffff55]");
+        break;
+
+      case 'CLS':
+      case 'CLEAR':
+        if (cliOutput) cliOutput.innerHTML = '';
+        printLine(`C:\\BROTHER&gt; SCREEN BUFFER CLEARED.`);
+        break;
+
+      default:
+        printLine(`Bad command or file name: "${cmd}". Type HELP for command list.`, "text-[#ff5555]");
+        break;
+    }
+  }
+
+  cliInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const val = cliInput.value;
+      cliInput.value = '';
+      handleCommand(val);
+    }
+  });
+
+  quickBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (cmd) handleCommand(cmd);
+    });
+  });
 </script>

@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "STARKNET BROTHER ($BROTHER) - The Leading Meme Movement on Starknet",
-  description = "Built on Starknet, powered by brothers. In BROTHERHOOD, we find strength. In openness, we find growth. In creation, we find purpose."
+  title = "BROTHER-DOS v3.1 [STARKNET OS] - Revolution from Hardship to Glory",
+  description = "The revolution of brother hardship on Starknet. Built on pure conviction, locked liquidity, and Cairo mathematical proofs."
 } = Astro.props;
 ---
 
@@ -32,36 +32,24 @@ const {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/image/logo.jpeg" />
 
-    <!-- Google Fonts: Space Grotesk & Inter -->
+    <!-- Google Fonts: VT323 & Share Tech Mono & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style is:global>
       body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Share Tech Mono', monospace;
       }
-      .font-display {
-        font-family: 'Space Grotesk', sans-serif;
+      .font-dos {
+        font-family: 'VT323', monospace;
       }
-      .font-mono {
+      .font-mono-code {
         font-family: 'JetBrains Mono', monospace;
-      }
-      /* Custom animated gradient mesh */
-      .bg-radial-glow {
-        background: radial-gradient(circle at 50% 0%, rgba(41, 83, 235, 0.15) 0%, rgba(5, 8, 17, 0) 70%);
-      }
-      .bg-radial-card {
-        background: radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.08) 0%, rgba(15, 22, 41, 0.8) 100%);
       }
     </style>
   </head>
-  <body class="min-h-screen bg-[#050811] text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
-    <!-- Background ambiance glow -->
-    <div class="fixed inset-0 pointer-events-none bg-radial-glow z-0"></div>
-    <div class="fixed top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[128px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-1/4 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
-
+  <body class="min-h-screen bg-[#07070b] text-[#55ffff] antialiased crt-screen crt-scanlines crt-flicker selection:bg-[#55ffff] selection:text-[#000080]">
     <div class="relative z-10 flex flex-col min-h-screen">
       <slot />
     </div>

@@ -2,85 +2,72 @@
 import { TOKEN_CONFIG } from '../data/brothers';
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-xl bg-[#050811]/75 border-b border-slate-800/80 transition-all">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-    <!-- Brand -->
-    <a href="/" class="flex items-center gap-3 group">
-      <div class="w-10 h-10 rounded-xl overflow-hidden ring-2 ring-blue-500/30 group-hover:ring-blue-500 transition-all shadow-lg shadow-blue-500/10">
-        <img 
-          src="/image/logo.jpeg" 
-          alt="Starknet Brother" 
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-          onerror="this.src='/favicon.png'"
-        />
-      </div>
-      <div class="flex flex-col">
-        <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-blue-400 transition-colors">
-          STARKNET BROTHER
-        </span>
-        <span class="text-[10px] font-mono tracking-widest text-blue-400 font-semibold uppercase">
-          $BROTHER • STARKNET
-        </span>
-      </div>
-    </a>
+<!-- MS-DOS / WIN 3.1 SYSTEM HEADER BAR -->
+<header class="sticky top-0 z-50 bg-[#000080] border-b-2 border-[#ffffff] text-white font-dos text-xl select-none shadow-md">
+  <div class="max-w-7xl mx-auto px-3 py-1 flex items-center justify-between flex-wrap gap-2">
+    
+    <!-- Left: OS Title & Status -->
+    <div class="flex items-center gap-3">
+      <span class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 font-bold text-base border border-[#ffffff]">
+        [≡]
+      </span>
+      <span class="text-[#ffff55] tracking-wider text-2xl font-bold">
+        BROTHER-DOS v3.1
+      </span>
+      <span class="hidden sm:inline-block bg-[#0000aa] text-[#55ffff] px-2 py-0.5 text-base border border-[#55ffff]">
+        BASE MEM: 640KB OK
+      </span>
+      <span class="hidden md:inline-block text-[#55ff55] text-base">
+        [STARKNET_MAINNET.SYS ACTIVE]
+      </span>
+    </div>
 
-    <!-- Navigation links -->
-    <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-full border border-slate-800">
-      <a href="#about" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
-        About
+    <!-- Quick Function Key Shortcuts (DOS Navigation) -->
+    <nav class="flex items-center gap-2 overflow-x-auto text-sm sm:text-base font-mono-code py-1">
+      <a href="#dos-prompt" class="px-2 py-0.5 bg-[#c0c0c0] text-[#000000] hover:bg-[#ffffff] font-bold border-t border-l border-white border-b-2 border-r-2 border-black">
+        F1:PROMPT
       </a>
-      <a href="#hall-of-fame" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
-        Hall of Fame
+      <a href="#manifesto" class="px-2 py-0.5 bg-[#c0c0c0] text-[#000000] hover:bg-[#ffffff] font-bold border-t border-l border-white border-b-2 border-r-2 border-black">
+        F2:MANIFESTO
       </a>
-      <a href="/manifesto" class="px-4 py-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 rounded-full hover:bg-blue-500/10 transition-all flex items-center gap-1.5">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-        Manifesto
+      <a href="#hall-of-fame" class="px-2 py-0.5 bg-[#c0c0c0] text-[#000000] hover:bg-[#ffffff] font-bold border-t border-l border-white border-b-2 border-r-2 border-black">
+        F3:ROSTER
       </a>
-      <a href="#meme-maker" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
-        Meme Lab
+      <a href="#meme-maker" class="px-2 py-0.5 bg-[#c0c0c0] text-[#000000] hover:bg-[#ffffff] font-bold border-t border-l border-white border-b-2 border-r-2 border-black">
+        F4:PAINT.EXE
       </a>
-      <a href="#stats" class="px-4 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full hover:bg-slate-800/80 transition-all">
-        Tokenomics
+      <a href={TOKEN_CONFIG.avnuBuyUrl} target="_blank" class="px-2 py-0.5 bg-[#55ff55] text-[#000000] hover:bg-[#ffffff] font-bold border-t border-l border-white border-b-2 border-r-2 border-black">
+        F5:BUY_AVNU
       </a>
     </nav>
 
-    <!-- Actions & Wallet -->
-    <div class="flex items-center gap-3">
-      <!-- Live Dex Link -->
-      <a 
-        href={TOKEN_CONFIG.dexScreenerUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800/70 hover:bg-slate-800 px-3 py-2 rounded-xl border border-slate-700/60 transition-all"
+    <!-- CRT Filter & Wallet Toggle -->
+    <div class="flex items-center gap-2">
+      <button 
+        id="toggle-crt-btn"
+        class="px-2 py-0.5 bg-[#0000aa] text-[#ffff55] border border-[#ffff55] hover:bg-[#ffff55] hover:text-[#000000] text-xs font-mono-code cursor-pointer"
+        title="Toggle CRT Scanline Effect"
       >
-        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-        </svg>
-        <span>Chart</span>
-      </a>
+        [CRT: ON]
+      </button>
 
-      <!-- Buy CTA Button -->
-      <a 
-        href={TOKEN_CONFIG.avnuBuyUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 px-4 py-2 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-200"
-      >
-        <span>Buy on AVNU</span>
-        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
-
-      <!-- Starknet Wallet Button trigger -->
       <button 
         id="wallet-connect-btn"
-        class="inline-flex items-center gap-2 text-xs font-medium text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-blue-500/50 px-3 py-2 rounded-xl transition-all cursor-pointer"
-        title="Connect Starknet Wallet (Argent / Braavos)"
+        class="px-2.5 py-0.5 bg-[#c0c0c0] text-[#000000] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black font-bold text-xs font-mono-code active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
       >
-        <span class="w-2 h-2 rounded-full bg-slate-500" id="wallet-indicator"></span>
-        <span id="wallet-btn-label">Connect</span>
+        <span id="wallet-btn-label">CONNECT_WALLET.SYS</span>
       </button>
     </div>
+
   </div>
 </header>
+
+<script>
+  // Toggle CRT Scanlines
+  const crtBtn = document.getElementById('toggle-crt-btn');
+  crtBtn?.addEventListener('click', () => {
+    const isScanline = document.body.classList.toggle('crt-scanlines');
+    document.body.classList.toggle('crt-flicker');
+    crtBtn.textContent = isScanline ? '[CRT: ON]' : '[CRT: OFF]';
+  });
+</script>

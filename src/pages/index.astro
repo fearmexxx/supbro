@@ -10,147 +10,98 @@ import { TOKEN_CONFIG } from '../data/brothers';
 ---
 
 <Layout>
-  <!-- Main Navigation -->
+  <!-- MS-DOS / WIN 3.1 System Header -->
   <Navbar />
 
-  <main>
-    <!-- 1. Hero Section -->
+  <main class="space-y-6">
+    <!-- 1. Hero Section: IBM BIOS Boot & MS-DOS Interactive Shell -->
     <Hero />
 
-    <!-- 2. Live On-Chain Stats & Tokenomics -->
+    <!-- 2. Windows 3.1 Live DEX Monitor -->
     <TokenStats />
 
-    <!-- 3. About & Genesis Lore Card -->
-    <section id="about" class="py-20 relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#0c1324] to-[#080d19] border border-slate-700/80 shadow-2xl">
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            
-            <div class="md:col-span-8 space-y-4">
-              <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-widest">
-                FAIR LAUNCH • ZERO CABAL
-              </span>
-              <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">
-                The Origin of $BROTHER
-              </h2>
-              <p class="text-base text-slate-300 leading-relaxed">
-                Launched on Halloween (October 31, 2024) via <a href={TOKEN_CONFIG.platformUrl} target="_blank" class="text-blue-400 underline underline-offset-4 font-semibold hover:text-blue-300">unruggable.meme</a>, Starknet Brother was born from the conviction that true community cannot be bought or manufactured. With 100% locked liquidity and mathematically verified contracts, $BROTHER stands as the beacon of Starknet memetic power.
-              </p>
-              <div class="pt-2 flex flex-wrap gap-4">
-                <a 
-                  href="/manifesto" 
-                  class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-500/20"
-                >
-                  Explore Manifesto Lore →
-                </a>
-                <a 
-                  href={TOKEN_CONFIG.platformUrl} 
-                  target="_blank"
-                  class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700"
-                >
-                  Verify on unruggable.meme ↗
-                </a>
-              </div>
-            </div>
-
-            <div class="md:col-span-4 flex justify-center">
-              <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-75 transition duration-300"></div>
-                <div class="relative w-44 h-44 rounded-3xl bg-slate-900 border border-slate-700/80 p-3 flex flex-col items-center justify-center shadow-xl">
-                  <img src="/image/unrug.svg" alt="Unruggable Meme" class="w-20 h-20 object-contain mb-2" onerror="this.src='/favicon.png'"/>
-                  <span class="text-[11px] font-mono text-emerald-400 font-bold">🔒 100% Locked LP</span>
-                  <span class="text-[9px] font-mono text-slate-400">unruggable.meme</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Interactive Brothers Hall of Fame -->
+    <!-- 3. Windows 3.1 Hall of Fame Dossier -->
     <HallOfFame />
 
-    <!-- 5. Community Meme & PFP Generator -->
+    <!-- 4. Windows 3.1 MS Paint Meme Lab -->
     <MemeMaker />
 
-    <!-- 6. Manifesto Banner CTA -->
-    <section class="py-20 bg-gradient-to-b from-[#050811] via-[#091124] to-[#050811] border-t border-slate-800">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white">
-          "A BROTHER alone is strong. BROTHERS together are unstoppable."
-        </h2>
-        <p class="text-base text-slate-400 max-w-2xl mx-auto">
-          Read the 10 sacred tenets of the Brother Code, explore our vision for enduring community economics, and become a full-time evangelist.
+    <!-- 5. Historical Hardship Archive & Manifesto Teaser Window -->
+    <section id="manifesto-teaser" class="max-w-7xl mx-auto px-4 py-6">
+      <div class="dos-box p-6 font-mono-code text-white">
+        <div class="border-b-2 border-[#ffff55] pb-2 mb-4 flex items-center justify-between">
+          <span class="text-[#ffff55] font-bold text-lg sm:text-xl font-dos">
+            C:\ARCHIVE\HARDSHIP_TO_REVOLUTION.DOC
+          </span>
+          <span class="text-xs text-[#55ffff]">
+            STATUS: PERMANENT LORE
+          </span>
+        </div>
+
+        <p class="text-sm sm:text-base text-[#55ffff] mb-4 leading-relaxed">
+          "A BROTHER ALONE IS STRONG. BROTHERS TOGETHER ARE UNSTOPPABLE."
+          In an age of surveillance capitalism, declining social bonds, and tech disruption, brotherhood offers something greater: genuine human conviction and the power to selectively reveal ourselves to the world.
         </p>
-        <div class="pt-2">
+
+        <div class="flex flex-wrap gap-3">
           <a 
             href="/manifesto" 
-            class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm shadow-xl transition-all"
+            class="win31-btn px-4 py-2 font-bold text-xs text-black bg-[#ffffff] hover:bg-[#55ffff] cursor-pointer"
           >
-            <span>Open The Complete Manifesto</span>
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            EXECUTE EDIT_MANIFESTO.EXE ↗
+          </a>
+          <a 
+            href={TOKEN_CONFIG.avnuBuyUrl} 
+            target="_blank" 
+            class="win31-btn px-4 py-2 font-bold text-xs text-black bg-[#55ff55] hover:bg-[#ffffff] cursor-pointer"
+          >
+            TRADE $BROTHER ON AVNU ↗
           </a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Global Footer -->
+  <!-- Retro System Footer -->
   <Footer />
 
   <!-- Global Starknet Wallet Connector Modal/Script -->
   <script>
-    // Starknet Wallet simulation & connector logic for Argent X / Braavos
     const walletBtn = document.getElementById('wallet-connect-btn');
     const walletLabel = document.getElementById('wallet-btn-label');
-    const walletIndicator = document.getElementById('wallet-indicator');
 
     let isConnected = false;
 
     if (walletBtn) {
       walletBtn.addEventListener('click', async () => {
         if (!isConnected) {
-          // Check for injected starknet providers window.starknet / argent / braavos
           const starknet = (window as any).starknet || (window as any).starknet_argentX || (window as any).starknet_braavos;
           if (starknet && starknet.enable) {
             try {
-              walletLabel!.textContent = 'Connecting...';
+              walletLabel!.textContent = 'LOADING_DRIVER...';
               await starknet.enable();
               const account = starknet.selectedAddress;
               if (account) {
                 isConnected = true;
-                walletLabel!.textContent = `${account.slice(0, 6)}...${account.slice(-4)}`;
-                walletIndicator!.classList.remove('bg-slate-500');
-                walletIndicator!.classList.add('bg-emerald-400');
+                walletLabel!.textContent = `${account.slice(0, 6)}...${account.slice(-4)}.DRV`;
                 return;
               }
             } catch (err) {
-              console.log('Wallet connect cancelled or error:', err);
+              console.log('Wallet error:', err);
             }
           }
 
-          // Fallback simulation for users without extension installed
-          const confirmed = confirm("Starknet Wallet Connect:\n\nConnect with Argent X or Braavos to verify your $BROTHER token status?\n\n(Click OK to simulate Starknet session)");
+          const confirmed = confirm("[STARKNET DRIVER INITIALIZE]\n\nLoad Argent X / Braavos driver to inspect $BROTHER balance?\n\n(Click OK to load simulated session)");
           if (confirmed) {
             isConnected = true;
-            walletLabel!.textContent = "0x04b8...89fe (Brother)";
-            walletIndicator!.classList.remove('bg-slate-500');
-            walletIndicator!.classList.add('bg-emerald-400');
-            alert("🎉 Connected to Starknet!\n\nRank: Verified Brother\nBalance: 142,000,000 $BROTHER\nStatus: Diamond Conviction");
+            walletLabel!.textContent = "0x04b8...89fe.SYS";
+            alert("SUCCESS: DRIVER LOADED // RANK: CORE BROTHER // BALANCE: 142M $BROTHER // STATUS: 100% UNRUGGABLE");
           } else {
-            walletLabel!.textContent = "Connect";
+            walletLabel!.textContent = "CONNECT_WALLET.SYS";
           }
         } else {
-          // Disconnect toggle
           isConnected = false;
-          walletLabel!.textContent = "Connect";
-          walletIndicator!.classList.remove('bg-emerald-400');
-          walletIndicator!.classList.add('bg-slate-500');
+          walletLabel!.textContent = "CONNECT_WALLET.SYS";
         }
       });
     }

@@ -3,139 +3,166 @@ import { BROTHERS_LIST } from '../data/brothers';
 const initialBro = BROTHERS_LIST[0]; // Maxx
 ---
 
-<section id="hall-of-fame" class="py-24 relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="hall-of-fame" class="max-w-7xl mx-auto px-4 py-8">
+  
+  <!-- Windows 3.1 Gallery Window -->
+  <div class="win31-window">
     
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono">
-        CORE BROTHERS & LEADERSHIP
+    <!-- Titlebar -->
+    <div class="win31-titlebar flex items-center justify-between font-mono-code text-sm">
+      <div class="flex items-center gap-2">
+        <span class="bg-[#c0c0c0] text-[#000000] px-1.5 border border-white text-xs">▼</span>
+        <span>ROSTER.EXE - [CORE BROTHERS HALL OF FAME]</span>
       </div>
-      <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
-        BROTHERS HALL OF FAME
-      </h2>
-      <p class="text-base sm:text-lg text-slate-300">
-        The core team, council elders, tech architects, and OGs building and stewarding the Starknet Brother movement.
-      </p>
-    </div>
-
-    <!-- Active Profile Spotlight (Bento Display) -->
-    <div id="spotlight-card" class="mb-16 p-6 sm:p-10 rounded-3xl bg-[#0d1424] border border-slate-700/80 shadow-2xl transition-all duration-300">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        
-        <div class="md:col-span-4 flex justify-center">
-          <div class="relative group">
-            <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500"></div>
-            <img 
-              id="spotlight-image"
-              src={`/brothers/${initialBro.id}.jpeg`} 
-              alt={`Brother ${initialBro.name}`} 
-              class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-2xl object-cover ring-2 ring-blue-500/40 shadow-2xl"
-              onerror="this.src='/image/logo.jpeg'"
-            />
-          </div>
-        </div>
-
-        <div class="md:col-span-8 space-y-4 text-left">
-          <div class="flex flex-wrap items-center gap-3">
-            <h3 id="spotlight-name" class="font-display font-black text-3xl sm:text-4xl text-white">
-              {initialBro.name}
-            </h3>
-            <span id="spotlight-role" class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
-              {initialBro.role}
-            </span>
-            <span id="spotlight-alias" class="text-xs font-mono px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
-              {initialBro.alias}
-            </span>
-          </div>
-
-          <blockquote id="spotlight-quote" class="text-base sm:text-xl font-medium text-slate-200 italic border-l-2 border-blue-500 pl-4 py-1">
-            "{initialBro.quote}"
-          </blockquote>
-
-          <p id="spotlight-description" class="text-sm sm:text-base text-slate-400 leading-relaxed">
-            {initialBro.description}
-          </p>
-
-          <div id="spotlight-tags" class="flex flex-wrap gap-2 pt-2">
-            {initialBro.tags.map(t => (
-              <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 text-xs font-mono text-slate-300 border border-slate-700">#{t}</span>
-            ))}
-          </div>
-        </div>
-
+      <div class="flex items-center gap-1">
+        <button class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 border border-white text-xs font-bold">▲</button>
+        <button class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 border border-white text-xs font-bold">■</button>
       </div>
     </div>
 
-    <!-- Clean Roster of the 7 Key Brothers -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
-      {BROTHERS_LIST.map((bro, idx) => (
-        <button 
-          type="button"
-          data-bro={JSON.stringify(bro)}
-          class={`brother-avatar-btn group relative flex flex-col items-center p-3 rounded-2xl border transition-all cursor-pointer ${
-            idx === 0 
-              ? 'bg-blue-600/15 border-blue-500 ring-2 ring-blue-500/50 shadow-lg shadow-blue-500/10' 
-              : 'bg-slate-900/60 border-slate-800 hover:border-slate-600 hover:bg-slate-800/60'
-          }`}
-          title={`${bro.name} (${bro.role})`}
-        >
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden mb-2.5 relative shadow">
-            <img 
-              src={`/brothers/${bro.id}.jpeg`} 
-              alt={bro.name}
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              loading="lazy"
-              onerror="this.src='/image/logo.jpeg'"
-            />
+    <!-- Window Menu -->
+    <div class="bg-[#c0c0c0] border-b border-[#808080] px-3 py-1 flex items-center gap-4 text-xs font-mono-code text-black select-none">
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>F</u>ile</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>V</u>iew</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>P</u>rofile</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>L</u>ore</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
+    </div>
+
+    <!-- Window Content Area -->
+    <div class="p-4 sm:p-6 bg-[#0000aa] text-white font-mono-code">
+      
+      <!-- Narrative Header -->
+      <div class="border-b border-[#55ffff] pb-3 mb-6">
+        <div class="text-[#ffff55] font-bold text-base sm:text-lg">
+          [ARCHIVE_7_CHOSEN]: VETERANS OF THE HARD TIMES
+        </div>
+        <p class="text-xs sm:text-sm text-[#55ffff]">
+          Brothers who held through market stagnation and engineered the Starknet culture revolution.
+        </p>
+      </div>
+
+      <!-- Spotlight Dossier Card -->
+      <div class="bg-[#000000] border-2 border-white p-4 sm:p-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          
+          <!-- Avatar Frame -->
+          <div class="md:col-span-4 flex justify-center">
+            <div class="border-4 border-[#55ffff] p-1 bg-[#000080] shadow-md">
+              <img 
+                id="spotlight-image"
+                src={`/brothers/${initialBro.id}.jpeg`} 
+                alt={`Brother ${initialBro.name}`} 
+                class="w-48 h-48 sm:w-56 sm:h-56 object-cover filter contrast-125"
+                onerror="this.src='/image/logo.jpeg'"
+              />
+            </div>
           </div>
-          <span class="text-sm font-display font-bold text-slate-100 group-hover:text-blue-400 transition-colors truncate max-w-full">
-            {bro.name}
-          </span>
-          <span class="text-[11px] font-mono text-blue-400 font-semibold truncate max-w-full mt-0.5">
-            {bro.role}
-          </span>
-        </button>
-      ))}
+
+          <!-- Brother Dossier Info -->
+          <div class="md:col-span-8 space-y-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="text-2xl sm:text-3xl font-bold text-[#ffff55]" id="spotlight-name">
+                {initialBro.name}
+              </span>
+              <span class="px-2 py-0.5 bg-[#55ff55] text-black font-bold text-xs" id="spotlight-role">
+                ROLE: {initialBro.role}
+              </span>
+              <span class="px-2 py-0.5 bg-[#000080] border border-[#55ffff] text-[#55ffff] text-xs" id="spotlight-alias">
+                {initialBro.alias}
+              </span>
+            </div>
+
+            <!-- Quote -->
+            <div class="bg-[#000080] border-l-4 border-[#ffff55] p-3 text-xs sm:text-sm text-[#ffffff] italic">
+              <span id="spotlight-quote">"{initialBro.quote}"</span>
+            </div>
+
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-[#aaaaaa] leading-relaxed" id="spotlight-description">
+              {initialBro.description}
+            </p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 pt-1" id="spotlight-tags">
+              {initialBro.tags.map(t => (
+                <span class="bg-[#333333] border border-[#aaaaaa] px-2 py-0.5 text-[11px] text-[#55ffff]">
+                  [{t}]
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 7 Brothers Selectable DOS Buttons -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+        {BROTHERS_LIST.map((bro, idx) => (
+          <button 
+            type="button"
+            data-bro={JSON.stringify(bro)}
+            class={`hof-selector-btn win31-btn p-2 flex flex-col items-center gap-2 cursor-pointer ${
+              idx === 0 ? 'bg-[#ffffff] ring-2 ring-[#ffff55]' : ''
+            }`}
+          >
+            <div class="w-14 h-14 border border-black overflow-hidden bg-black">
+              <img 
+                src={`/brothers/${bro.id}.jpeg`} 
+                alt={bro.name} 
+                class="w-full h-full object-cover"
+                onerror="this.src='/image/logo.jpeg'"
+              />
+            </div>
+            <div class="text-center font-bold text-xs text-black">
+              <div>{bro.name}</div>
+              <div class="text-[10px] text-[#000080] font-normal">[{bro.role}]</div>
+            </div>
+          </button>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Window Footer -->
+    <div class="bg-[#c0c0c0] border-t border-[#ffffff] px-3 py-1 flex items-center justify-between text-xs font-mono-code text-black select-none">
+      <span>SELECTED RECORD: 7/7 ACTIVE // MEMORY: 640KB</span>
+      <span>CLICK A BROTHER TO INSPECT DOSSIER</span>
     </div>
 
   </div>
+
 </section>
 
 <script>
-  // Interactive Brother Selector Logic
-  const buttons = document.querySelectorAll('.brother-avatar-btn');
+  const buttons = document.querySelectorAll('.hof-selector-btn');
   const spotlightImage = document.getElementById('spotlight-image') as HTMLImageElement;
   const spotlightName = document.getElementById('spotlight-name');
-  const spotlightAlias = document.getElementById('spotlight-alias');
   const spotlightRole = document.getElementById('spotlight-role');
+  const spotlightAlias = document.getElementById('spotlight-alias');
   const spotlightQuote = document.getElementById('spotlight-quote');
   const spotlightDesc = document.getElementById('spotlight-description');
   const spotlightTags = document.getElementById('spotlight-tags');
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // update active styles
       buttons.forEach(b => {
-        b.classList.remove('bg-blue-600/15', 'border-blue-500', 'ring-2', 'ring-blue-500/50', 'shadow-lg', 'shadow-blue-500/10');
-        b.classList.add('bg-slate-900/60', 'border-slate-800');
+        b.classList.remove('bg-[#ffffff]', 'ring-2', 'ring-[#ffff55]');
       });
-      btn.classList.add('bg-blue-600/15', 'border-blue-500', 'ring-2', 'ring-blue-500/50', 'shadow-lg', 'shadow-blue-500/10');
-      btn.classList.remove('bg-slate-900/60', 'border-slate-800');
+      btn.classList.add('bg-[#ffffff]', 'ring-2', 'ring-[#ffff55]');
 
-      const broDataRaw = btn.getAttribute('data-bro');
-      if (broDataRaw) {
-        const bro = JSON.parse(broDataRaw);
+      const raw = btn.getAttribute('data-bro');
+      if (raw) {
+        const bro = JSON.parse(raw);
         if (spotlightImage) spotlightImage.src = `/brothers/${bro.id}.jpeg`;
         if (spotlightName) spotlightName.textContent = bro.name;
+        if (spotlightRole) spotlightRole.textContent = `ROLE: ${bro.role}`;
         if (spotlightAlias) spotlightAlias.textContent = bro.alias;
-        if (spotlightRole) spotlightRole.textContent = bro.role;
         if (spotlightQuote) spotlightQuote.textContent = `"${bro.quote}"`;
         if (spotlightDesc) spotlightDesc.textContent = bro.description;
-
         if (spotlightTags && bro.tags) {
           spotlightTags.innerHTML = bro.tags.map((t: string) => `
-            <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 text-xs font-mono text-slate-300 border border-slate-700">#${t}</span>
+            <span class="bg-[#333333] border border-[#aaaaaa] px-2 py-0.5 text-[11px] text-[#55ffff]">[${t}]</span>
           `).join('');
         }
       }

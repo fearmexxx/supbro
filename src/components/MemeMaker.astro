@@ -2,133 +2,142 @@
 import { BROTHERS_LIST } from '../data/brothers';
 ---
 
-<section id="meme-maker" class="py-24 border-t border-slate-800/80 bg-[#060a14] relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="meme-maker" class="max-w-7xl mx-auto px-4 py-8">
+  
+  <!-- Windows 3.1 MS Paint Styled Window -->
+  <div class="win31-window">
     
-    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono">
-        COMMUNITY CREATION LAB
+    <!-- Titlebar -->
+    <div class="win31-titlebar flex items-center justify-between font-mono-code text-sm">
+      <div class="flex items-center gap-2">
+        <span class="bg-[#c0c0c0] text-[#000000] px-1.5 border border-white text-xs">▼</span>
+        <span>BROTHER_PAINT.EXE - [REVOLUTION MEME LAB v3.1]</span>
       </div>
-      <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
-        BROTHER MEME & PFP MAKER
-      </h2>
-      <p class="text-base sm:text-lg text-slate-300">
-        Empowering every brother to create, remix, and evangelize Starknet. Pick a base brother, add custom banners or meme text, and download instantly.
-      </p>
+      <div class="flex items-center gap-1">
+        <button class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 border border-white text-xs font-bold">▲</button>
+        <button class="bg-[#c0c0c0] text-[#000000] px-2 py-0.5 border border-white text-xs font-bold">■</button>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
-      <!-- Canvas Display Preview -->
-      <div class="lg:col-span-6 flex flex-col items-center">
-        <div class="relative p-4 rounded-3xl bg-[#0c1222] border border-slate-700/80 shadow-2xl w-full max-w-md">
-          <div class="aspect-square w-full rounded-2xl overflow-hidden bg-black relative flex items-center justify-center">
-            <canvas id="pfp-canvas" width="600" height="600" class="w-full h-full object-contain"></canvas>
-          </div>
+    <!-- Paint Menu Bar -->
+    <div class="bg-[#c0c0c0] border-b border-[#808080] px-3 py-1 flex items-center gap-4 text-xs font-mono-code text-black select-none">
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>F</u>ile</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>E</u>dit</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>V</u>iew</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>T</u>ext</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>P</u>alette</span>
+      <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
+    </div>
 
-          <div class="mt-4 flex items-center justify-between gap-3">
-            <button 
-              id="download-meme-btn"
-              class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              <span>Download Brother Meme</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Controls & Customizer -->
-      <div class="lg:col-span-6 space-y-6">
+    <!-- Paint Work Area -->
+    <div class="p-4 sm:p-6 bg-[#808080] text-black font-mono-code">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- Step 1: Select Brother Base -->
-        <div class="p-6 rounded-2xl bg-[#0d1424] border border-slate-800">
-          <label class="block text-xs font-mono text-slate-400 uppercase mb-3">1. Select Brother Base</label>
-          <div class="flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin">
-            {BROTHERS_LIST.slice(0, 10).map((bro) => (
-              <button 
-                type="button"
-                data-img={`/brothers/${bro.id}.jpeg`}
-                class="base-select-btn shrink-0 w-14 h-14 rounded-xl overflow-hidden border-2 border-slate-700 hover:border-blue-500 transition-all cursor-pointer"
-              >
-                <img src={`/brothers/${bro.id}.jpeg`} alt={bro.name} class="w-full h-full object-cover" onerror="this.src='/image/logo.jpeg'"/>
+        <!-- Canvas Canvas Display -->
+        <div class="lg:col-span-6 flex flex-col items-center">
+          <div class="border-4 border-[#ffffff] border-r-[#404040] border-b-[#404040] bg-[#ffffff] p-2 shadow-inner">
+            <canvas id="dos-canvas" width="600" height="600" class="w-full max-w-sm aspect-square bg-black border-2 border-black object-contain"></canvas>
+          </div>
+
+          <button 
+            id="download-dos-meme-btn"
+            class="mt-4 win31-btn px-6 py-2.5 font-bold text-sm text-black flex items-center gap-2 cursor-pointer shadow-md active:translate-x-0.5 active:translate-y-0.5"
+          >
+            <span>💾 SAVE_AS_BITMAP.BMP</span>
+          </button>
+        </div>
+
+        <!-- Toolset & Captions Panel -->
+        <div class="lg:col-span-6 space-y-4">
+          
+          <!-- Palette 1: Pick Base Brother -->
+          <div class="win31-window p-3">
+            <div class="text-xs font-bold text-black uppercase mb-2 border-b border-gray-400 pb-1">
+              1. SELECT 8-BIT BASE ASSET:
+            </div>
+            <div class="flex gap-2 overflow-x-auto pb-1">
+              {BROTHERS_LIST.map((bro) => (
+                <button 
+                  type="button"
+                  data-img={`/brothers/${bro.id}.jpeg`}
+                  class="paint-base-btn border-2 border-black p-0.5 bg-white shrink-0 w-12 h-12 cursor-pointer hover:border-[#000080]"
+                  title={bro.name}
+                >
+                  <img src={`/brothers/${bro.id}.jpeg`} alt={bro.name} class="w-full h-full object-cover" onerror="this.src='/image/logo.jpeg'"/>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Palette 2: Text Captions -->
+          <div class="win31-window p-3 space-y-3">
+            <div class="text-xs font-bold text-black uppercase border-b border-gray-400 pb-1">
+              2. RETRO CAPTION OVERLAY:
+            </div>
+            <div>
+              <label class="block text-[10px] text-gray-700 mb-1">TOP CAPTION:</label>
+              <input 
+                type="text" 
+                id="dos-top-text" 
+                value="BROTHERCYCLE (REAL)" 
+                class="w-full bg-white border-2 border-black px-2 py-1 text-xs font-mono-code uppercase font-bold text-black focus:outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-[10px] text-gray-700 mb-1">BOTTOM CAPTION:</label>
+              <input 
+                type="text" 
+                id="dos-bot-text" 
+                value="FROM HARDSHIP TO GLORY" 
+                class="w-full bg-white border-2 border-black px-2 py-1 text-xs font-mono-code uppercase font-bold text-black focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <!-- Palette 3: Retro Badge Stamp -->
+          <div class="win31-window p-3">
+            <div class="text-xs font-bold text-black uppercase mb-2 border-b border-gray-400 pb-1">
+              3. STAMP TOOL:
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <button type="button" class="stamp-btn win31-btn px-2.5 py-1 font-bold" data-stamp="STARKNET_BRO">
+                [🏷️ STARKNET_BRO]
               </button>
-            ))}
+              <button type="button" class="stamp-btn win31-btn px-2.5 py-1 font-bold" data-stamp="HARDSHIP_SURVIVOR">
+                [🛡️ HARDSHIP_VETERAN]
+              </button>
+              <button type="button" class="stamp-btn win31-btn px-2.5 py-1 font-bold" data-stamp="100%_UNRUGGABLE">
+                [🔒 UNRUGGABLE]
+              </button>
+            </div>
           </div>
-        </div>
 
-        <!-- Step 2: Custom Text Overlay -->
-        <div class="p-6 rounded-2xl bg-[#0d1424] border border-slate-800 space-y-4">
-          <label class="block text-xs font-mono text-slate-400 uppercase">2. Top & Bottom Captions</label>
-          <div>
-            <input 
-              type="text" 
-              id="top-caption-input" 
-              placeholder="TOP CAPTION (e.g. IN BROTHERHOOD)" 
-              value="BROTHERCYCLE (REAL)"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 font-mono"
-            />
-          </div>
-          <div>
-            <input 
-              type="text" 
-              id="bottom-caption-input" 
-              placeholder="BOTTOM CAPTION (e.g. WE BUILD WHAT LASTS)" 
-              value="WE ARE ALL BROTHERS"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 font-mono"
-            />
-          </div>
-        </div>
-
-        <!-- Step 3: Badges & Starknet Stamp -->
-        <div class="p-6 rounded-2xl bg-[#0d1424] border border-slate-800">
-          <label class="block text-xs font-mono text-slate-400 uppercase mb-3">3. Overlay Stamp</label>
-          <div class="flex flex-wrap gap-3">
-            <button 
-              type="button" 
-              class="stamp-toggle-btn px-4 py-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-300 text-xs font-mono font-medium hover:bg-blue-600/30 transition-all cursor-pointer"
-              data-stamp="STARKNET BRO"
-            >
-              🏷️ $BROTHER Badge
-            </button>
-            <button 
-              type="button" 
-              class="stamp-toggle-btn px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono font-medium hover:bg-slate-700 transition-all cursor-pointer"
-              data-stamp="DIAMOND HANDS"
-            >
-              💎 Diamond Conviction
-            </button>
-            <button 
-              type="button" 
-              class="stamp-toggle-btn px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono font-medium hover:bg-slate-700 transition-all cursor-pointer"
-              data-stamp="UNRUGGABLE"
-            >
-              🔒 100% Unruggable
-            </button>
-          </div>
         </div>
 
       </div>
+    </div>
 
+    <!-- Window Footer -->
+    <div class="bg-[#c0c0c0] border-t border-[#ffffff] px-3 py-1 flex items-center justify-between text-xs font-mono-code text-black select-none">
+      <span>TOOL: CAPTION BRUSH // COLOR: DOS HIGH INTENSITY</span>
+      <span>READY FOR EXPORT</span>
     </div>
 
   </div>
+
 </section>
 
 <script>
-  // Canvas Meme Rendering Engine
-  const canvas = document.getElementById('pfp-canvas') as HTMLCanvasElement;
+  const canvas = document.getElementById('dos-canvas') as HTMLCanvasElement;
   const ctx = canvas?.getContext('2d');
-  const topInput = document.getElementById('top-caption-input') as HTMLInputElement;
-  const bottomInput = document.getElementById('bottom-caption-input') as HTMLInputElement;
-  const downloadBtn = document.getElementById('download-meme-btn');
-  const baseButtons = document.querySelectorAll('.base-select-btn');
-  const stampButtons = document.querySelectorAll('.stamp-toggle-btn');
+  const topInput = document.getElementById('dos-top-text') as HTMLInputElement;
+  const botInput = document.getElementById('dos-bot-text') as HTMLInputElement;
+  const downloadBtn = document.getElementById('download-dos-meme-btn');
+  const baseButtons = document.querySelectorAll('.paint-base-btn');
+  const stampButtons = document.querySelectorAll('.stamp-btn');
 
-  let currentImageSrc = '/brothers/AKUMA.jpeg';
-  let currentStamp = 'STARKNET BRO';
+  let currentImageSrc = '/brothers/MAXX.jpeg';
+  let currentStamp = 'STARKNET_BRO';
 
   const baseImage = new Image();
   baseImage.crossOrigin = 'anonymous';
@@ -140,68 +149,63 @@ import { BROTHERS_LIST } from '../data/brothers';
     const w = canvas.width;
     const h = canvas.height;
 
-    // Draw background
-    ctx.fillStyle = '#050811';
+    // Draw retro DOS blue / black background
+    ctx.fillStyle = '#0000aa';
     ctx.fillRect(0, 0, w, h);
 
-    // Draw image
+    // Draw main image
     if (baseImage.complete && baseImage.naturalHeight !== 0) {
       ctx.drawImage(baseImage, 0, 0, w, h);
-    } else {
-      ctx.fillStyle = '#1e293b';
-      ctx.fillRect(0, 0, w, h);
     }
 
-    // Vignette / Shadow gradient top and bottom for text readability
-    const topGrad = ctx.createLinearGradient(0, 0, 0, 150);
-    topGrad.addColorStop(0, 'rgba(0,0,0,0.8)');
-    topGrad.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = topGrad;
-    ctx.fillRect(0, 0, w, 150);
+    // DOS Scanline effect on canvas
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    for (let y = 0; y < h; y += 4) {
+      ctx.fillRect(0, y, w, 2);
+    }
 
-    const botGrad = ctx.createLinearGradient(0, h - 160, 0, h);
-    botGrad.addColorStop(0, 'rgba(0,0,0,0)');
-    botGrad.addColorStop(1, 'rgba(0,0,0,0.85)');
-    ctx.fillStyle = botGrad;
-    ctx.fillRect(0, h - 160, w, 160);
-
-    // Text configuration
-    ctx.font = '900 36px Impact, Arial Black, sans-serif';
-    ctx.textAlign = 'center';
+    // Top & Bottom banner strips (retro text boxes)
+    ctx.fillStyle = '#000080';
+    ctx.fillRect(0, 0, w, 70);
     ctx.fillStyle = '#ffffff';
-    ctx.strokeStyle = '#000000';
-    ctx.lineWidth = 5;
+    ctx.fillRect(0, 68, w, 3);
 
-    // Render Top Caption
+    ctx.fillStyle = '#000080';
+    ctx.fillRect(0, h - 80, w, 80);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, h - 82, w, 3);
+
+    // Typography
+    ctx.font = 'bold 30px Courier New, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffff55';
+
     const topText = topInput?.value || '';
     if (topText) {
-      ctx.strokeText(topText.toUpperCase(), w / 2, 60);
-      ctx.fillText(topText.toUpperCase(), w / 2, 60);
+      ctx.fillText(topText.toUpperCase(), w / 2, 46);
     }
 
-    // Render Bottom Caption
-    const botText = bottomInput?.value || '';
+    const botText = botInput?.value || '';
     if (botText) {
-      ctx.strokeText(botText.toUpperCase(), w / 2, h - 45);
-      ctx.fillText(botText.toUpperCase(), w / 2, h - 45);
+      ctx.fillStyle = '#55ffff';
+      ctx.fillText(botText.toUpperCase(), w / 2, h - 35);
     }
 
-    // Render Stamp Badge
+    // Stamp badge in corner
     if (currentStamp) {
-      ctx.save();
-      ctx.fillStyle = '#2563eb';
-      ctx.fillRect(20, h - 85, 200, 32);
-      ctx.font = 'bold 16px monospace';
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(20, h - 120, 240, 30);
+      ctx.strokeStyle = '#55ff55';
+      ctx.strokeRect(20, h - 120, 240, 30);
+      ctx.font = 'bold 15px monospace';
+      ctx.fillStyle = '#55ff55';
       ctx.textAlign = 'center';
-      ctx.fillText(`⚡ ${currentStamp}`, 120, h - 63);
-      ctx.restore();
+      ctx.fillText(`[${currentStamp}]`, 140, h - 100);
     }
   }
 
-  // Event Listeners
   topInput?.addEventListener('input', renderCanvas);
-  bottomInput?.addEventListener('input', renderCanvas);
+  botInput?.addEventListener('input', renderCanvas);
 
   baseButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -215,13 +219,6 @@ import { BROTHERS_LIST } from '../data/brothers';
 
   stampButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      stampButtons.forEach(b => {
-        b.classList.remove('bg-blue-600/20', 'border-blue-500/40', 'text-blue-300');
-        b.classList.add('bg-slate-800', 'border-slate-700', 'text-slate-300');
-      });
-      btn.classList.add('bg-blue-600/20', 'border-blue-500/40', 'text-blue-300');
-      btn.classList.remove('bg-slate-800', 'border-slate-700', 'text-slate-300');
-
       currentStamp = btn.getAttribute('data-stamp') || '';
       renderCanvas();
     });
@@ -230,7 +227,7 @@ import { BROTHERS_LIST } from '../data/brothers';
   downloadBtn?.addEventListener('click', () => {
     if (!canvas) return;
     const link = document.createElement('a');
-    link.download = `starknet-brother-${Date.now()}.png`;
+    link.download = `starknet-brother-dos-${Date.now()}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
