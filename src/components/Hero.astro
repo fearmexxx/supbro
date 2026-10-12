@@ -11,7 +11,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
     <div class="border-b-2 border-[#55ffff] pb-3 mb-4 text-[#55ffff]">
       <div>BROTHER-BIOS (C) 2024-2026 STARKNET MEME CORP. ALL RIGHTS RESERVED.</div>
       <div class="text-[#aaaaaa] text-lg">REVOLUTION PROTOCOL: HARDSHIP TO ETERNAL GLORY // CAIRO v2.8.4 KERNEL</div>
-      <div class="text-[#ffff55] text-lg">IRC GATEWAY: irc.starknet.brother:6667 #BROTHERHOOD // 640KB BASE OK</div>
+      <div class="text-[#ffff55] text-lg">PUBLIC IRC GATEWAY: irc.starknet.brother:6667 #BROTHERHOOD // 640KB BASE OK</div>
     </div>
 
     <!-- Hardship to Revolution Narrative in ASCII Box -->
@@ -57,7 +57,10 @@ import { TOKEN_CONFIG } from '../data/brothers';
         <div class="flex items-center gap-3 text-[11px] text-[#000080] font-bold">
           <span>Channel: #BROTHERHOOD</span>
           <span>Modes: [+tns]</span>
-          <span class="text-emerald-700" id="user-count-badge">[142 Users Online]</span>
+          <span class="text-emerald-700 flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="user-count-badge">[Live P2P Swarm]</span>
+          </span>
         </div>
       </div>
 
@@ -66,10 +69,9 @@ import { TOKEN_CONFIG } from '../data/brothers';
         
         <!-- Messages Log Window -->
         <div id="mirc-messages" class="md:col-span-9 p-3 h-72 sm:h-80 overflow-y-auto space-y-1 text-xs sm:text-sm font-mono-code bg-[#000000] text-[#55ff55] scrollbar-thin">
-          <div class="text-[#aaaaaa]">* Connecting to irc.starknet.brother (6667)...</div>
-          <div class="text-[#aaaaaa]">* Connected to #BROTHERHOOD [Starknet Mainnet Gateway]</div>
+          <div class="text-[#aaaaaa]">* Connecting to public Starknet Gun.js/WSS relay...</div>
+          <div class="text-[#55ff55]">* Connected to #BROTHERHOOD [Global Peer-to-Peer Relay]</div>
           <div class="text-[#ffff55] font-bold">* Topic for #BROTHERHOOD: "From Hardship to Revolution. Decades, not days. 100% Unruggable LP"</div>
-          <div class="text-[#55ffff]">* Channel created on Halloween (Oct 31, 2024) via unruggable.meme</div>
           <div class="border-b border-[#333333] my-1"></div>
           
           <div><span class="text-[#ff5555] font-bold">&lt;@Maxx&gt;</span> Zero user acquisition cost when passion is maximum. Welcome brothers!</div>
@@ -84,9 +86,9 @@ import { TOKEN_CONFIG } from '../data/brothers';
         <!-- mIRC Nicklist (Right Sidebar) -->
         <div class="hidden md:block md:col-span-3 bg-[#ffffff] border-l-2 border-[#808080] p-2 h-72 sm:h-80 overflow-y-auto text-xs font-mono-code text-black select-none">
           <div class="font-bold text-[11px] text-[#000080] border-b border-gray-300 pb-1 mb-1">
-            ONLINE NICKLIST (7)
+            ONLINE NICKLIST
           </div>
-          <ul class="space-y-0.5">
+          <ul class="space-y-0.5" id="nicklist-ul">
             <li class="font-bold text-red-700 flex items-center gap-1"><span>@</span>Maxx <span class="text-[9px] text-gray-500">[Team]</span></li>
             <li class="font-bold text-purple-700 flex items-center gap-1"><span>@</span>Odin <span class="text-[9px] text-gray-500">[Elder]</span></li>
             <li class="font-bold text-blue-700 flex items-center gap-1"><span>+</span>Sam <span class="text-[9px] text-gray-500">[TechGod]</span></li>
@@ -94,7 +96,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
             <li class="font-bold text-amber-700 flex items-center gap-1"><span>+</span>Lyskey <span class="text-[9px] text-gray-500">[Historian]</span></li>
             <li class="font-bold text-emerald-700 flex items-center gap-1"><span>+</span>Cudan <span class="text-[9px] text-gray-500">[OGs]</span></li>
             <li class="font-bold text-teal-700 flex items-center gap-1"><span>+</span>OneFarmer <span class="text-[9px] text-gray-500">[OGs]</span></li>
-            <li class="text-gray-600 italic text-[11px] pt-1 border-t border-gray-200" id="current-user-nick">+You [AnonBro]</li>
+            <li class="text-gray-600 italic text-[11px] pt-1 border-t border-gray-200" id="current-user-nick">+AnonBro [You]</li>
           </ul>
         </div>
 
@@ -117,7 +119,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
         <input 
           type="text" 
           id="mirc-msg-input" 
-          placeholder="Type message and press Enter to chat in #BROTHERHOOD..."
+          placeholder="Type message and press Enter to chat across the world in #BROTHERHOOD..."
           class="flex-1 bg-white border-2 border-black px-2 py-1 text-xs sm:text-sm text-black font-mono-code focus:outline-none"
           autocomplete="off"
         />
@@ -194,40 +196,45 @@ import { TOKEN_CONFIG } from '../data/brothers';
 
 </section>
 
+<!-- Load Gun.js from reliable CDN for global decentralized real-time sync -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+
 <script>
-  // mIRC Realtime Broadcast Channel & Local Memory
+  // Global Realtime Sync via Decentralized Gun.js Peer Relays + BroadcastChannel fallback
   const messagesBox = document.getElementById('mirc-messages');
   const nickInput = document.getElementById('mirc-nick-input') as HTMLInputElement;
   const msgInput = document.getElementById('mirc-msg-input') as HTMLInputElement;
   const sendBtn = document.getElementById('mirc-send-btn');
   const currentUserNick = document.getElementById('current-user-nick');
-  const userCountBadge = document.getElementById('user-count-badge');
   const quickBtns = document.querySelectorAll('.quick-cmd-btn');
 
   const contractAddress = "0x03b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee";
 
-  // BroadcastChannel for cross-tab realtime messaging
-  const channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('starknet_brother_irc') : null;
+  // Unique session ID to prevent echo loops
+  const mySessionId = 'user_' + Math.random().toString(36).substring(2, 9);
 
-  // Restore saved nick if exists
-  const savedNick = localStorage.getItem('brother_irc_nick');
-  if (savedNick && nickInput) {
-    nickInput.value = savedNick;
-    if (currentUserNick) currentUserNick.textContent = `+${savedNick} [You]`;
-  }
+  // Random initial anonymous nickname if none stored
+  let myNick = localStorage.getItem('brother_irc_nick') || ('Bro_' + Math.floor(100 + Math.random() * 900));
+  if (nickInput) nickInput.value = myNick;
+  if (currentUserNick) currentUserNick.textContent = `+${myNick} [You]`;
 
   nickInput?.addEventListener('input', () => {
-    const val = nickInput.value.trim() || 'AnonBro';
-    localStorage.setItem('brother_irc_nick', val);
-    if (currentUserNick) currentUserNick.textContent = `+${val} [You]`;
+    myNick = nickInput.value.trim() || 'AnonBro';
+    localStorage.setItem('brother_irc_nick', myNick);
+    if (currentUserNick) currentUserNick.textContent = `+${myNick} [You]`;
   });
 
-  function appendChatMessage(nick: string, text: string, isSelf = false) {
-    if (!messagesBox) return;
+  // Track rendered message IDs to prevent duplicates
+  const seenMessages = new Set<string>();
+
+  function appendChatMessage(id: string, nick: string, text: string, isSelf = false) {
+    if (!messagesBox || seenMessages.has(id)) return;
+    seenMessages.add(id);
+
     const line = document.createElement('div');
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    line.innerHTML = `<span class="text-[#555555]">[${time}]</span> <span class="${isSelf ? 'text-[#ffff55]' : 'text-[#55ffff]'} font-bold">&lt;${isSelf ? '+' : ''}${nick}&gt;</span> <span class="text-white">${escapeHtml(text)}</span>`;
+    line.innerHTML = `<span class="text-[#555555]">[${time}]</span> <span class="${isSelf ? 'text-[#ffff55]' : 'text-[#55ffff]'} font-bold">&lt;${isSelf ? '+' : ''}${escapeHtml(nick)}&gt;</span> <span class="text-white">${escapeHtml(text)}</span>`;
     messagesBox.appendChild(line);
     messagesBox.scrollTop = messagesBox.scrollHeight;
   }
@@ -238,66 +245,95 @@ import { TOKEN_CONFIG } from '../data/brothers';
     );
   }
 
-  function sendChatMessage() {
-    if (!msgInput) return;
-    const msg = msgInput.value.trim();
-    if (!msg) return;
+  // Initialize Gun.js with multiple high-availability public relays
+  let gun: any = null;
+  let brotherChatRoom: any = null;
 
-    const nick = (nickInput?.value.trim()) || 'AnonBro';
-    appendChatMessage(nick, msg, true);
+  try {
+    if (typeof (window as any).Gun !== 'undefined') {
+      gun = (window as any).Gun({
+        peers: [
+          'https://gun-manhattan.herokuapp.com/gun',
+          'https://relay.peer.ooo/gun'
+        ]
+      });
+      brotherChatRoom = gun.get('supbro_fun_brotherhood_irc_v1');
 
-    // Broadcast to other open tabs / visitors
-    if (channel) {
-      channel.postMessage({ nick, msg, time: Date.now() });
+      // Listen for incoming messages from ANY user across the globe
+      brotherChatRoom.map().on((data: any, key: string) => {
+        if (data && data.text && data.nick) {
+          const isSelf = data.senderId === mySessionId;
+          appendChatMessage(key, data.nick, data.text, isSelf);
+        }
+      });
     }
-
-    // Save chat history locally
-    try {
-      const history = JSON.parse(localStorage.getItem('brother_irc_history') || '[]');
-      history.push({ nick, msg, time: Date.now() });
-      if (history.length > 50) history.shift();
-      localStorage.setItem('brother_irc_history', JSON.stringify(history));
-    } catch(e) {}
-
-    msgInput.value = '';
-
-    // Automated retro bot responses to certain keywords
-    triggerBotReply(msg);
+  } catch (err) {
+    console.log('Gun.js init note:', err);
   }
 
-  // Incoming messages from other tabs
-  if (channel) {
-    channel.onmessage = (event) => {
-      if (event.data && event.data.nick && event.data.msg) {
-        appendChatMessage(event.data.nick, event.data.msg, false);
+  // Cross-Tab BroadcastChannel Fallback (works across private windows, tabs, etc.)
+  const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('starknet_brother_live_irc') : null;
+  if (bc) {
+    bc.onmessage = (e) => {
+      if (e.data && e.data.id && e.data.text && e.data.nick) {
+        appendChatMessage(e.data.id, e.data.nick, e.data.text, e.data.senderId === mySessionId);
       }
     };
   }
 
-  // Load recent local history
-  try {
-    const history = JSON.parse(localStorage.getItem('brother_irc_history') || '[]');
-    history.forEach((item: any) => {
-      appendChatMessage(item.nick, item.msg, item.nick === (nickInput?.value || 'AnonBro'));
-    });
-  } catch(e) {}
+  // Send message function
+  function sendChatMessage() {
+    if (!msgInput) return;
+    const text = msgInput.value.trim();
+    if (!text) return;
 
-  // Automated Starknet Bot replies to add life to the IRC room
+    const nick = (nickInput?.value.trim()) || myNick;
+    const msgId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+
+    // Immediately show on local UI
+    appendChatMessage(msgId, nick, text, true);
+
+    // Broadcast through Gun.js decentralized network
+    if (brotherChatRoom) {
+      brotherChatRoom.get(msgId).put({
+        id: msgId,
+        nick: nick,
+        text: text,
+        senderId: mySessionId,
+        timestamp: Date.now()
+      });
+    }
+
+    // Broadcast across browser tabs/windows
+    if (bc) {
+      bc.postMessage({ id: msgId, nick, text, senderId: mySessionId });
+    }
+
+    msgInput.value = '';
+
+    // Bot triggers
+    triggerBotReply(text);
+  }
+
+  // Automated Starknet network bots
   function triggerBotReply(text: string) {
     const upper = text.toUpperCase();
     if (upper.includes('CA') || upper.includes('CONTRACT')) {
       setTimeout(() => {
-        appendChatMessage('Bot_Starkscan', `Official $BROTHER CA: ${contractAddress}`, false);
+        const id = 'bot_' + Date.now();
+        appendChatMessage(id, 'Bot_Starkscan', `Official $BROTHER CA: ${contractAddress}`, false);
       }, 1000);
     } else if (upper.includes('PRICE') || upper.includes('PUMP')) {
       setTimeout(() => {
-        appendChatMessage('Bot_Avnu', 'Check live charts on DexScreener or GeckoTerminal. Unruggable conviction!', false);
+        const id = 'bot_' + Date.now();
+        appendChatMessage(id, 'Bot_Avnu', 'Check live charts on DexScreener or GeckoTerminal. 100% Unruggable liquidity!', false);
       }, 1200);
     } else if (upper.includes('GM') || upper.includes('HI') || upper.includes('HELLO')) {
       setTimeout(() => {
         const bots = ['Maxx', 'Yoyo', 'Sam', 'OneFarmer'];
         const chosen = bots[Math.floor(Math.random() * bots.length)];
-        appendChatMessage(chosen, 'GM brother! Welcome to the revolution.', false);
+        const id = 'bot_' + Date.now();
+        appendChatMessage(id, chosen, 'GM brother! Welcome to the revolution.', false);
       }, 1500);
     }
   }
@@ -326,7 +362,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
         window.open('https://www.geckoterminal.com/starknet-alpha/pools/0x00d4cf27867a524d5da0eb8a9d570506c9db85ee8fce7a90e4c5f8488251360a', '_blank');
       } else if (cmd === 'CONTRACT') {
         navigator.clipboard.writeText(contractAddress);
-        appendChatMessage('System', `Contract address copied: ${contractAddress}`, false);
+        appendChatMessage('sys_' + Date.now(), 'System', `Contract address copied: ${contractAddress}`, false);
       }
     });
   });
