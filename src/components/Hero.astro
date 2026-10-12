@@ -11,7 +11,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
     <div class="border-b-2 border-[#55ffff] pb-3 mb-4 text-[#55ffff]">
       <div>BROTHER-BIOS (C) 2024-2026 STARKNET MEME CORP. ALL RIGHTS RESERVED.</div>
       <div class="text-[#aaaaaa] text-lg">REVOLUTION PROTOCOL: HARDSHIP TO ETERNAL GLORY // CAIRO v2.8.4 KERNEL</div>
-      <div class="text-[#ffff55] text-lg">MEMORY CHECK: 640KB BASE OK // 1,000,000,000,000,000 $BROTHER EXTENDED OK</div>
+      <div class="text-[#ffff55] text-lg">IRC GATEWAY: irc.starknet.brother:6667 #BROTHERHOOD // 640KB BASE OK</div>
     </div>
 
     <!-- Hardship to Revolution Narrative in ASCII Box -->
@@ -29,34 +29,111 @@ import { TOKEN_CONFIG } from '../data/brothers';
       </p>
     </div>
 
-    <!-- Interactive Command Line Shell -->
-    <div class="mt-6 bg-[#000000] border-2 border-[#55ffff] p-4 text-[#55ff55] font-mono-code text-sm sm:text-base">
-      <div class="text-[#aaaaaa] text-xs mb-3">
-        Type <span class="text-[#ffff55]">HELP</span>, <span class="text-[#ffff55]">DIR</span>, <span class="text-[#ffff55]">MANIFESTO</span>, <span class="text-[#ffff55]">BUY</span>, <span class="text-[#ffff55]">ROSTER</span>, <span class="text-[#ffff55]">CONTRACT</span>, or <span class="text-[#ffff55]">CLS</span>
+    <!-- mIRC / OLD SCHOOL RETRO IRC CHAT WINDOW -->
+    <div class="mt-6 win31-window text-black font-mono-code text-sm">
+      
+      <!-- mIRC Titlebar -->
+      <div class="win31-titlebar flex items-center justify-between text-xs sm:text-sm">
+        <div class="flex items-center gap-2">
+          <span class="bg-[#c0c0c0] text-black px-1 font-bold border border-white">#</span>
+          <span>mIRC32 - [#BROTHERHOOD: Starknet Brothers Live Chat]</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="text-[11px] bg-[#008080] px-1.5 py-0.2 text-white border border-white">TOPIC: BROTHERCYCLE (REAL)</span>
+          <button class="bg-[#c0c0c0] text-black px-1.5 font-bold border border-white text-xs">▲</button>
+          <button class="bg-[#c0c0c0] text-black px-1.5 font-bold border border-white text-xs">■</button>
+        </div>
       </div>
 
-      <!-- Output log -->
-      <div id="cli-output" class="space-y-1 mb-3">
-        <div>C:\BROTHER&gt; SYSTEM BOOT READY. STARKNET REVOLUTION ENGINE LOADED.</div>
-        <div class="text-[#ffff55]">C:\BROTHER&gt; TYPE 'DIR' TO BROWSE REVOLUTION FILES OR USE THE BUTTONS BELOW.</div>
+      <!-- mIRC Menu & Channel Mode Bar -->
+      <div class="bg-[#c0c0c0] border-b border-[#808080] px-2 py-0.5 flex flex-wrap items-center justify-between text-xs select-none gap-2">
+        <div class="flex items-center gap-3">
+          <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>F</u>ile</span>
+          <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>V</u>iew</span>
+          <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>C</u>ommands</span>
+          <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>W</u>indow</span>
+          <span class="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
+        </div>
+        <div class="flex items-center gap-3 text-[11px] text-[#000080] font-bold">
+          <span>Channel: #BROTHERHOOD</span>
+          <span>Modes: [+tns]</span>
+          <span class="text-emerald-700" id="user-count-badge">[142 Users Online]</span>
+        </div>
       </div>
 
-      <!-- Command Input line -->
-      <div class="flex items-center gap-2">
-        <span class="text-[#55ffff] font-bold shrink-0">C:\BROTHER&gt;</span>
+      <!-- Main Chat Body: Messages (Left) + Nicklist (Right) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 bg-black border-2 border-black">
+        
+        <!-- Messages Log Window -->
+        <div id="mirc-messages" class="md:col-span-9 p-3 h-72 sm:h-80 overflow-y-auto space-y-1 text-xs sm:text-sm font-mono-code bg-[#000000] text-[#55ff55] scrollbar-thin">
+          <div class="text-[#aaaaaa]">* Connecting to irc.starknet.brother (6667)...</div>
+          <div class="text-[#aaaaaa]">* Connected to #BROTHERHOOD [Starknet Mainnet Gateway]</div>
+          <div class="text-[#ffff55] font-bold">* Topic for #BROTHERHOOD: "From Hardship to Revolution. Decades, not days. 100% Unruggable LP"</div>
+          <div class="text-[#55ffff]">* Channel created on Halloween (Oct 31, 2024) via unruggable.meme</div>
+          <div class="border-b border-[#333333] my-1"></div>
+          
+          <div><span class="text-[#ff5555] font-bold">&lt;@Maxx&gt;</span> Zero user acquisition cost when passion is maximum. Welcome brothers!</div>
+          <div><span class="text-[#d946ef] font-bold">&lt;@Odin&gt;</span> A brother alone is strong. Brothers together are unstoppable.</div>
+          <div><span class="text-[#3b82f6] font-bold">&lt;+Sam&gt;</span> Cairo contracts running on STARK proofs. Zero downtime.</div>
+          <div><span class="text-[#f97316] font-bold">&lt;+Yoyo&gt;</span> Rise by lifting others! Who is diamond handing through the dip? 💎</div>
+          <div><span class="text-[#eab308] font-bold">&lt;+Lyskey&gt;</span> Logging every transaction into permanent lore archives.</div>
+          <div><span class="text-[#10b981] font-bold">&lt;+Cudan&gt;</span> Liquidity is 100% locked on unruggable.meme. Never fading.</div>
+          <div><span class="text-[#55ffff] font-bold">&lt;+OneFarmer&gt;</span> Cultivating on Starknet daily. We build what lasts! 🚜</div>
+        </div>
+
+        <!-- mIRC Nicklist (Right Sidebar) -->
+        <div class="hidden md:block md:col-span-3 bg-[#ffffff] border-l-2 border-[#808080] p-2 h-72 sm:h-80 overflow-y-auto text-xs font-mono-code text-black select-none">
+          <div class="font-bold text-[11px] text-[#000080] border-b border-gray-300 pb-1 mb-1">
+            ONLINE NICKLIST (7)
+          </div>
+          <ul class="space-y-0.5">
+            <li class="font-bold text-red-700 flex items-center gap-1"><span>@</span>Maxx <span class="text-[9px] text-gray-500">[Team]</span></li>
+            <li class="font-bold text-purple-700 flex items-center gap-1"><span>@</span>Odin <span class="text-[9px] text-gray-500">[Elder]</span></li>
+            <li class="font-bold text-blue-700 flex items-center gap-1"><span>+</span>Sam <span class="text-[9px] text-gray-500">[TechGod]</span></li>
+            <li class="font-bold text-orange-700 flex items-center gap-1"><span>+</span>Yoyo <span class="text-[9px] text-gray-500">[OGs]</span></li>
+            <li class="font-bold text-amber-700 flex items-center gap-1"><span>+</span>Lyskey <span class="text-[9px] text-gray-500">[Historian]</span></li>
+            <li class="font-bold text-emerald-700 flex items-center gap-1"><span>+</span>Cudan <span class="text-[9px] text-gray-500">[OGs]</span></li>
+            <li class="font-bold text-teal-700 flex items-center gap-1"><span>+</span>OneFarmer <span class="text-[9px] text-gray-500">[OGs]</span></li>
+            <li class="text-gray-600 italic text-[11px] pt-1 border-t border-gray-200" id="current-user-nick">+You [AnonBro]</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- mIRC Chat Input Bar -->
+      <div class="bg-[#c0c0c0] p-2 border-t-2 border-[#ffffff] flex items-center gap-2">
+        <div class="flex items-center gap-1">
+          <span class="text-[11px] font-bold text-black">NICK:</span>
+          <input 
+            type="text" 
+            id="mirc-nick-input" 
+            value="AnonBro" 
+            maxlength="15"
+            class="w-20 sm:w-24 bg-white border border-black px-1.5 py-0.5 text-xs text-black font-bold font-mono-code focus:outline-none"
+            title="Change your chat handle"
+          />
+        </div>
+
         <input 
           type="text" 
-          id="cli-input"
-          class="w-full bg-transparent text-[#ffff55] focus:outline-none font-mono-code text-sm sm:text-base uppercase"
-          placeholder="TYPE COMMAND HERE..."
+          id="mirc-msg-input" 
+          placeholder="Type message and press Enter to chat in #BROTHERHOOD..."
+          class="flex-1 bg-white border-2 border-black px-2 py-1 text-xs sm:text-sm text-black font-mono-code focus:outline-none"
           autocomplete="off"
-          autofocus
         />
-        <span class="dos-cursor"></span>
+
+        <button 
+          id="mirc-send-btn"
+          type="button"
+          class="win31-btn px-4 py-1 text-xs font-bold text-black cursor-pointer active:translate-x-0.5 active:translate-y-0.5"
+        >
+          SEND
+        </button>
       </div>
+
     </div>
 
-    <!-- Quick Tool Bar / Floppy Action Buttons -->
+    <!-- Quick Tool Bar / Action Buttons -->
     <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
       <button 
         type="button" 
@@ -118,125 +195,139 @@ import { TOKEN_CONFIG } from '../data/brothers';
 </section>
 
 <script>
-  // MS-DOS CLI Logic
-  const cliInput = document.getElementById('cli-input') as HTMLInputElement;
-  const cliOutput = document.getElementById('cli-output');
+  // mIRC Realtime Broadcast Channel & Local Memory
+  const messagesBox = document.getElementById('mirc-messages');
+  const nickInput = document.getElementById('mirc-nick-input') as HTMLInputElement;
+  const msgInput = document.getElementById('mirc-msg-input') as HTMLInputElement;
+  const sendBtn = document.getElementById('mirc-send-btn');
+  const currentUserNick = document.getElementById('current-user-nick');
+  const userCountBadge = document.getElementById('user-count-badge');
   const quickBtns = document.querySelectorAll('.quick-cmd-btn');
 
   const contractAddress = "0x03b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee";
 
-  function printLine(text: string, colorClass = "text-[#ffffff]") {
-    if (!cliOutput) return;
-    const div = document.createElement('div');
-    div.className = colorClass;
-    div.innerHTML = text;
-    cliOutput.appendChild(div);
-    cliOutput.scrollTop = cliOutput.scrollHeight;
+  // BroadcastChannel for cross-tab realtime messaging
+  const channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('starknet_brother_irc') : null;
+
+  // Restore saved nick if exists
+  const savedNick = localStorage.getItem('brother_irc_nick');
+  if (savedNick && nickInput) {
+    nickInput.value = savedNick;
+    if (currentUserNick) currentUserNick.textContent = `+${savedNick} [You]`;
   }
 
-  function handleCommand(cmdRaw: string) {
-    const cmd = cmdRaw.trim().toUpperCase();
-    if (!cmd) return;
-
-    printLine(`C:\\BROTHER&gt; ${cmd}`, "text-[#ffff55]");
-
-    switch (cmd) {
-      case 'HELP':
-        printLine(`AVAILABLE COMMANDS:`, "text-[#55ffff]");
-        printLine(`  DIR           - List directory files and programs`);
-        printLine(`  MANIFESTO     - Open sacred brother lore & tenets`);
-        printLine(`  ROSTER        - View Brothers Hall of Fame`);
-        printLine(`  BUY           - Open Avnu Swap interface`);
-        printLine(`  CHART / GECKO - Open DexScreener & GeckoTerminal`);
-        printLine(`  MEME / PAINT  - Launch 8-bit Meme & PFP Creator`);
-        printLine(`  CONTRACT      - Copy $BROTHER contract address`);
-        printLine(`  HARDSHIP      - Read the revolution back-story`);
-        printLine(`  CLS           - Clear terminal buffer`);
-        break;
-
-      case 'DIR':
-        printLine(` Volume in drive C is BROTHER_REVOLUTION`);
-        printLine(` Directory of C:\\BROTHER`, "text-[#55ffff]");
-        printLine(` MANIFESTO.TXT     2,024  10-31-24  Sacred Creed`);
-        printLine(` ROSTER.EXE       18,000  10-31-24  Core Brothers`);
-        printLine(` BUY_AVNU.SYS      4,321  10-31-24  DEX Protocol`);
-        printLine(` PAINT_MEME.EXE   64,000  10-31-24  Creation Lab`);
-        printLine(` GECKOTERM.COM     1,337  10-31-24  Live Pool`);
-        printLine(` CONTRACT.TXT         66  10-31-24  Starknet Address`);
-        printLine(` HARDSHIP.LOG        640  10-31-24  Historical Struggle`);
-        printLine(`       7 File(s)    90,488 bytes`);
-        printLine(`       1 Dir(s)  1,000,000,000,000,000 bytes free`, "text-[#55ff55]");
-        break;
-
-      case 'MANIFESTO':
-        printLine(`LOADING MANIFESTO.TXT INTO MEMORY...`, "text-[#55ffff]");
-        const manEl = document.getElementById('manifesto');
-        if (manEl) manEl.scrollIntoView({ behavior: 'smooth' });
-        break;
-
-      case 'ROSTER':
-      case 'HALL OF FAME':
-        printLine(`EXECUTING ROSTER.EXE (7 CORE BROTHERS)...`, "text-[#55ffff]");
-        const hofEl = document.getElementById('hall-of-fame');
-        if (hofEl) hofEl.scrollIntoView({ behavior: 'smooth' });
-        break;
-
-      case 'MEME':
-      case 'PAINT':
-        printLine(`INITIALIZING PAINT_MEME.EXE...`, "text-[#55ffff]");
-        const memeEl = document.getElementById('meme-maker');
-        if (memeEl) memeEl.scrollIntoView({ behavior: 'smooth' });
-        break;
-
-      case 'BUY':
-        printLine(`CONNECTING TO AVNU DEX ROUTER...`, "text-[#55ff55]");
-        window.open('https://app.avnu.fi/en?amount=0.1&tokenFrom=0x4718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d&tokenTo=0x3b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee', '_blank');
-        break;
-
-      case 'GECKO':
-      case 'CHART':
-        printLine(`OPENING GECKOTERMINAL ALPHA POOL...`, "text-[#55ff55]");
-        window.open('https://www.geckoterminal.com/starknet-alpha/pools/0x00d4cf27867a524d5da0eb8a9d570506c9db85ee8fce7a90e4c5f8488251360a', '_blank');
-        break;
-
-      case 'CONTRACT':
-      case 'CA':
-        navigator.clipboard.writeText(contractAddress);
-        printLine(`[SUCCESS] CONTRACT ADDRESS COPIED TO CLIPBOARD:`, "text-[#55ff55]");
-        printLine(`&gt;&gt; ${contractAddress}`, "text-[#ffff55]");
-        break;
-
-      case 'HARDSHIP':
-        printLine(`[ARCHIVE LOG: BROTHER HARDSHIP]`, "text-[#55ffff]");
-        printLine(`We endured the era of zero liquidity, predatory VCs, and bear fatigue.`);
-        printLine(`Brothers banded together on Starknet. No cabal. Just conviction.`);
-        printLine(`The revolution has arrived: BROTHERCYCLE (REAL).`, "text-[#ffff55]");
-        break;
-
-      case 'CLS':
-      case 'CLEAR':
-        if (cliOutput) cliOutput.innerHTML = '';
-        printLine(`C:\\BROTHER&gt; SCREEN BUFFER CLEARED.`);
-        break;
-
-      default:
-        printLine(`Bad command or file name: "${cmd}". Type HELP for command list.`, "text-[#ff5555]");
-        break;
-    }
-  }
-
-  cliInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const val = cliInput.value;
-      cliInput.value = '';
-      handleCommand(val);
-    }
+  nickInput?.addEventListener('input', () => {
+    const val = nickInput.value.trim() || 'AnonBro';
+    localStorage.setItem('brother_irc_nick', val);
+    if (currentUserNick) currentUserNick.textContent = `+${val} [You]`;
   });
 
+  function appendChatMessage(nick: string, text: string, isSelf = false) {
+    if (!messagesBox) return;
+    const line = document.createElement('div');
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    line.innerHTML = `<span class="text-[#555555]">[${time}]</span> <span class="${isSelf ? 'text-[#ffff55]' : 'text-[#55ffff]'} font-bold">&lt;${isSelf ? '+' : ''}${nick}&gt;</span> <span class="text-white">${escapeHtml(text)}</span>`;
+    messagesBox.appendChild(line);
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+  }
+
+  function escapeHtml(str: string) {
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+  }
+
+  function sendChatMessage() {
+    if (!msgInput) return;
+    const msg = msgInput.value.trim();
+    if (!msg) return;
+
+    const nick = (nickInput?.value.trim()) || 'AnonBro';
+    appendChatMessage(nick, msg, true);
+
+    // Broadcast to other open tabs / visitors
+    if (channel) {
+      channel.postMessage({ nick, msg, time: Date.now() });
+    }
+
+    // Save chat history locally
+    try {
+      const history = JSON.parse(localStorage.getItem('brother_irc_history') || '[]');
+      history.push({ nick, msg, time: Date.now() });
+      if (history.length > 50) history.shift();
+      localStorage.setItem('brother_irc_history', JSON.stringify(history));
+    } catch(e) {}
+
+    msgInput.value = '';
+
+    // Automated retro bot responses to certain keywords
+    triggerBotReply(msg);
+  }
+
+  // Incoming messages from other tabs
+  if (channel) {
+    channel.onmessage = (event) => {
+      if (event.data && event.data.nick && event.data.msg) {
+        appendChatMessage(event.data.nick, event.data.msg, false);
+      }
+    };
+  }
+
+  // Load recent local history
+  try {
+    const history = JSON.parse(localStorage.getItem('brother_irc_history') || '[]');
+    history.forEach((item: any) => {
+      appendChatMessage(item.nick, item.msg, item.nick === (nickInput?.value || 'AnonBro'));
+    });
+  } catch(e) {}
+
+  // Automated Starknet Bot replies to add life to the IRC room
+  function triggerBotReply(text: string) {
+    const upper = text.toUpperCase();
+    if (upper.includes('CA') || upper.includes('CONTRACT')) {
+      setTimeout(() => {
+        appendChatMessage('Bot_Starkscan', `Official $BROTHER CA: ${contractAddress}`, false);
+      }, 1000);
+    } else if (upper.includes('PRICE') || upper.includes('PUMP')) {
+      setTimeout(() => {
+        appendChatMessage('Bot_Avnu', 'Check live charts on DexScreener or GeckoTerminal. Unruggable conviction!', false);
+      }, 1200);
+    } else if (upper.includes('GM') || upper.includes('HI') || upper.includes('HELLO')) {
+      setTimeout(() => {
+        const bots = ['Maxx', 'Yoyo', 'Sam', 'OneFarmer'];
+        const chosen = bots[Math.floor(Math.random() * bots.length)];
+        appendChatMessage(chosen, 'GM brother! Welcome to the revolution.', false);
+      }, 1500);
+    }
+  }
+
+  msgInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendChatMessage();
+  });
+  sendBtn?.addEventListener('click', sendChatMessage);
+
+  // Quick Action Buttons
   quickBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const cmd = btn.getAttribute('data-cmd');
-      if (cmd) handleCommand(cmd);
+      if (cmd === 'BUY') {
+        window.open('https://app.avnu.fi/en?amount=0.1&tokenFrom=0x4718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d&tokenTo=0x3b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee', '_blank');
+      } else if (cmd === 'MANIFESTO') {
+        const manEl = document.getElementById('manifesto') || document.getElementById('manifesto-teaser');
+        if (manEl) manEl.scrollIntoView({ behavior: 'smooth' });
+      } else if (cmd === 'ROSTER') {
+        const hofEl = document.getElementById('hall-of-fame');
+        if (hofEl) hofEl.scrollIntoView({ behavior: 'smooth' });
+      } else if (cmd === 'MEME') {
+        const memeEl = document.getElementById('meme-maker');
+        if (memeEl) memeEl.scrollIntoView({ behavior: 'smooth' });
+      } else if (cmd === 'GECKO') {
+        window.open('https://www.geckoterminal.com/starknet-alpha/pools/0x00d4cf27867a524d5da0eb8a9d570506c9db85ee8fce7a90e4c5f8488251360a', '_blank');
+      } else if (cmd === 'CONTRACT') {
+        navigator.clipboard.writeText(contractAddress);
+        appendChatMessage('System', `Contract address copied: ${contractAddress}`, false);
+      }
     });
   });
 </script>
