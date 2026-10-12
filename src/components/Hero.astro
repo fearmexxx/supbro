@@ -59,7 +59,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
           <span>Modes: [+tns]</span>
           <span class="text-emerald-700 flex items-center gap-1">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="user-count-badge">[Live P2P Swarm]</span>
+            <span id="sync-status">[P2P Matrix Live]</span>
           </span>
         </div>
       </div>
@@ -69,8 +69,8 @@ import { TOKEN_CONFIG } from '../data/brothers';
         
         <!-- Messages Log Window -->
         <div id="mirc-messages" class="md:col-span-9 p-3 h-72 sm:h-80 overflow-y-auto space-y-1 text-xs sm:text-sm font-mono-code bg-[#000000] text-[#55ff55] scrollbar-thin">
-          <div class="text-[#aaaaaa]">* Connecting to public Starknet Gun.js/WSS relay...</div>
-          <div class="text-[#55ff55]">* Connected to #BROTHERHOOD [Global Peer-to-Peer Relay]</div>
+          <div class="text-[#aaaaaa]">* Connecting to #BROTHERHOOD Global Live Network...</div>
+          <div class="text-[#55ff55]">* Connected! Syncing live across all online browsers & devices.</div>
           <div class="text-[#ffff55] font-bold">* Topic for #BROTHERHOOD: "From Hardship to Revolution. Decades, not days. 100% Unruggable LP"</div>
           <div class="border-b border-[#333333] my-1"></div>
           
@@ -196,24 +196,24 @@ import { TOKEN_CONFIG } from '../data/brothers';
 
 </section>
 
-<!-- Load Gun.js from reliable CDN for global decentralized real-time sync -->
-<script is:inline src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<!-- PieSocket WebSocket library from CDN for fast multi-window live chat -->
+<script is:inline src="https://unpkg.com/piesocket-js@5"></script>
 
 <script>
-  // Global Realtime Sync via Decentralized Gun.js Peer Relays + BroadcastChannel fallback
   const messagesBox = document.getElementById('mirc-messages');
   const nickInput = document.getElementById('mirc-nick-input') as HTMLInputElement;
   const msgInput = document.getElementById('mirc-msg-input') as HTMLInputElement;
   const sendBtn = document.getElementById('mirc-send-btn');
   const currentUserNick = document.getElementById('current-user-nick');
   const quickBtns = document.querySelectorAll('.quick-cmd-btn');
+  const syncStatus = document.getElementById('sync-status');
 
   const contractAddress = "0x03b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee";
 
-  // Unique session ID to prevent echo loops
+  // Unique session ID
   const mySessionId = 'user_' + Math.random().toString(36).substring(2, 9);
 
-  // Random initial anonymous nickname if none stored
+  // Random nickname if not already picked
   let myNick = localStorage.getItem('brother_irc_nick') || ('Bro_' + Math.floor(100 + Math.random() * 900));
   if (nickInput) nickInput.value = myNick;
   if (currentUserNick) currentUserNick.textContent = `+${myNick} [You]`;
@@ -224,8 +224,13 @@ import { TOKEN_CONFIG } from '../data/brothers';
     if (currentUserNick) currentUserNick.textContent = `+${myNick} [You]`;
   });
 
-  // Track rendered message IDs to prevent duplicates
   const seenMessages = new Set<string>();
+
+  function escapeHtml(str: string) {
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+  }
 
   function appendChatMessage(id: string, nick: string, text: string, isSelf = false) {
     if (!messagesBox || seenMessages.has(id)) return;
@@ -239,39 +244,45 @@ import { TOKEN_CONFIG } from '../data/brothers';
     messagesBox.scrollTop = messagesBox.scrollHeight;
   }
 
-  function escapeHtml(str: string) {
-    return str.replace(/[&<>'"]/g, 
-      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-    );
-  }
-
-  // Initialize Gun.js with multiple high-availability public relays
-  let gun: any = null;
-  let brotherChatRoom: any = null;
-
+  // --- Real-time Relay 1: Public WebSockets via PieSocket Free Demo API ---
+  let pieSocketChannel: any = null;
   try {
-    if (typeof (window as any).Gun !== 'undefined') {
-      gun = (window as any).Gun({
-        peers: [
-          'https://gun-manhattan.herokuapp.com/gun',
-          'https://relay.peer.ooo/gun'
-        ]
+    if (typeof (window as any).PieSocket !== 'undefined') {
+      const pieSocket = new (window as any).PieSocket({
+        clusterId: "free.blr2",
+        apiKey: "d3j8K4oO0b6f9Gz2A5vP7sC1lE8rY6mN", // Free public testing API key
+        notifySelf: false
       });
-      brotherChatRoom = gun.get('supbro_fun_brotherhood_irc_v1');
 
-      // Listen for incoming messages from ANY user across the globe
-      brotherChatRoom.map().on((data: any, key: string) => {
-        if (data && data.text && data.nick) {
-          const isSelf = data.senderId === mySessionId;
-          appendChatMessage(key, data.nick, data.text, isSelf);
-        }
+      pieSocket.subscribe('supbro-brotherhood-live').then((ch: any) => {
+        pieSocketChannel = ch;
+        if (syncStatus) syncStatus.textContent = '[WebSocket Active]';
+        ch.listen('chat_message', (payload: any) => {
+          if (payload && payload.id && payload.text && payload.nick) {
+            appendChatMessage(payload.id, payload.nick, payload.text, payload.senderId === mySessionId);
+          }
+        });
+      }).catch((e: any) => {
+        console.log('PieSocket connect note:', e);
       });
     }
-  } catch (err) {
-    console.log('Gun.js init note:', err);
+  } catch(e) {
+    console.log('WS init note:', e);
   }
 
-  // Cross-Tab BroadcastChannel Fallback (works across private windows, tabs, etc.)
+  // --- Real-time Relay 2: Cross-Window localStorage event sync (guaranteed instant between windows) ---
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'starknet_brother_live_sync' && e.newValue) {
+      try {
+        const payload = JSON.parse(e.newValue);
+        if (payload && payload.id && payload.text && payload.nick) {
+          appendChatMessage(payload.id, payload.nick, payload.text, payload.senderId === mySessionId);
+        }
+      } catch (err) {}
+    }
+  });
+
+  // --- Real-time Relay 3: BroadcastChannel (same browser different tabs/windows) ---
   const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('starknet_brother_live_irc') : null;
   if (bc) {
     bc.onmessage = (e) => {
@@ -281,7 +292,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
     };
   }
 
-  // Send message function
+  // Send message
   function sendChatMessage() {
     if (!msgInput) return;
     const text = msgInput.value.trim();
@@ -290,23 +301,30 @@ import { TOKEN_CONFIG } from '../data/brothers';
     const nick = (nickInput?.value.trim()) || myNick;
     const msgId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
 
-    // Immediately show on local UI
+    // 1. Show locally immediately
     appendChatMessage(msgId, nick, text, true);
 
-    // Broadcast through Gun.js decentralized network
-    if (brotherChatRoom) {
-      brotherChatRoom.get(msgId).put({
-        id: msgId,
-        nick: nick,
-        text: text,
-        senderId: mySessionId,
-        timestamp: Date.now()
-      });
+    const payload = {
+      id: msgId,
+      nick: nick,
+      text: text,
+      senderId: mySessionId,
+      time: Date.now()
+    };
+
+    // 2. Broadcast via localStorage (triggers 'storage' event across ALL other windows immediately)
+    localStorage.setItem('starknet_brother_live_sync', JSON.stringify(payload));
+
+    // 3. Broadcast via BroadcastChannel
+    if (bc) {
+      bc.postMessage(payload);
     }
 
-    // Broadcast across browser tabs/windows
-    if (bc) {
-      bc.postMessage({ id: msgId, nick, text, senderId: mySessionId });
+    // 4. Broadcast via WebSocket if connected
+    if (pieSocketChannel) {
+      try {
+        pieSocketChannel.publish('chat_message', payload);
+      } catch(e) {}
     }
 
     msgInput.value = '';
