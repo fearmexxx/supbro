@@ -58,8 +58,8 @@ import { TOKEN_CONFIG } from '../data/brothers';
           <span>Channel: #BROTHERHOOD</span>
           <span>Modes: [+tns]</span>
           <span class="text-emerald-700 flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="sync-status">[P2P Matrix Live]</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" id="status-dot"></span>
+            <span id="sync-status">[Connecting Live Stream...]</span>
           </span>
         </div>
       </div>
@@ -69,8 +69,8 @@ import { TOKEN_CONFIG } from '../data/brothers';
         
         <!-- Messages Log Window -->
         <div id="mirc-messages" class="md:col-span-9 p-3 h-72 sm:h-80 overflow-y-auto space-y-1 text-xs sm:text-sm font-mono-code bg-[#000000] text-[#55ff55] scrollbar-thin">
-          <div class="text-[#aaaaaa]">* Connecting to #BROTHERHOOD Global Live Network...</div>
-          <div class="text-[#55ff55]">* Connected! Syncing live across all online browsers & devices.</div>
+          <div class="text-[#aaaaaa]">* Connecting to #BROTHERHOOD Global Live Relay...</div>
+          <div class="text-[#55ff55]">* Connected! Real-time stream active for all online Brothers worldwide.</div>
           <div class="text-[#ffff55] font-bold">* Topic for #BROTHERHOOD: "From Hardship to Revolution. Decades, not days. 100% Unruggable LP"</div>
           <div class="border-b border-[#333333] my-1"></div>
           
@@ -85,10 +85,12 @@ import { TOKEN_CONFIG } from '../data/brothers';
 
         <!-- mIRC Nicklist (Right Sidebar) -->
         <div class="hidden md:block md:col-span-3 bg-[#ffffff] border-l-2 border-[#808080] p-2 h-72 sm:h-80 overflow-y-auto text-xs font-mono-code text-black select-none">
-          <div class="font-bold text-[11px] text-[#000080] border-b border-gray-300 pb-1 mb-1">
-            ONLINE NICKLIST
+          <div class="font-bold text-[11px] text-[#000080] border-b border-gray-300 pb-1 mb-1 flex items-center justify-between">
+            <span>ONLINE NICKLIST</span>
+            <span id="online-count" class="text-emerald-700">(8+)</span>
           </div>
-          <ul class="space-y-0.5" id="nicklist-ul">
+          <!-- Core Brothers -->
+          <ul class="space-y-0.5">
             <li class="font-bold text-red-700 flex items-center gap-1"><span>@</span>Maxx <span class="text-[9px] text-gray-500">[Team]</span></li>
             <li class="font-bold text-purple-700 flex items-center gap-1"><span>@</span>Odin <span class="text-[9px] text-gray-500">[Elder]</span></li>
             <li class="font-bold text-blue-700 flex items-center gap-1"><span>+</span>Sam <span class="text-[9px] text-gray-500">[TechGod]</span></li>
@@ -96,7 +98,13 @@ import { TOKEN_CONFIG } from '../data/brothers';
             <li class="font-bold text-amber-700 flex items-center gap-1"><span>+</span>Lyskey <span class="text-[9px] text-gray-500">[Historian]</span></li>
             <li class="font-bold text-emerald-700 flex items-center gap-1"><span>+</span>Cudan <span class="text-[9px] text-gray-500">[OGs]</span></li>
             <li class="font-bold text-teal-700 flex items-center gap-1"><span>+</span>OneFarmer <span class="text-[9px] text-gray-500">[OGs]</span></li>
-            <li class="text-gray-600 italic text-[11px] pt-1 border-t border-gray-200" id="current-user-nick">+AnonBro [You]</li>
+          </ul>
+          <!-- Active Online Users List -->
+          <div class="font-bold text-[10px] text-gray-500 border-t border-gray-200 mt-2 pt-1">
+            ACTIVE VISITORS
+          </div>
+          <ul class="space-y-0.5 text-[11px]" id="visitors-nicklist">
+            <li class="text-blue-800 font-bold" id="current-user-nick">+AnonBro [You]</li>
           </ul>
         </div>
 
@@ -119,7 +127,7 @@ import { TOKEN_CONFIG } from '../data/brothers';
         <input 
           type="text" 
           id="mirc-msg-input" 
-          placeholder="Type message and press Enter to chat across the world in #BROTHERHOOD..."
+          placeholder="Type message and press Enter to chat live with all online brothers..."
           class="flex-1 bg-white border-2 border-black px-2 py-1 text-xs sm:text-sm text-black font-mono-code focus:outline-none"
           autocomplete="off"
         />
@@ -196,32 +204,71 @@ import { TOKEN_CONFIG } from '../data/brothers';
 
 </section>
 
-<!-- PieSocket WebSocket library from CDN for fast multi-window live chat -->
-<script is:inline src="https://unpkg.com/piesocket-js@5"></script>
-
 <script>
   const messagesBox = document.getElementById('mirc-messages');
   const nickInput = document.getElementById('mirc-nick-input') as HTMLInputElement;
   const msgInput = document.getElementById('mirc-msg-input') as HTMLInputElement;
   const sendBtn = document.getElementById('mirc-send-btn');
   const currentUserNick = document.getElementById('current-user-nick');
+  const visitorsNicklist = document.getElementById('visitors-nicklist');
+  const onlineCountEl = document.getElementById('online-count');
   const quickBtns = document.querySelectorAll('.quick-cmd-btn');
   const syncStatus = document.getElementById('sync-status');
 
   const contractAddress = "0x03b405a98c9e795d427fe82cdeeeed803f221b52471e3a757574a2b4180793ee";
 
-  // Unique session ID
-  const mySessionId = 'user_' + Math.random().toString(36).substring(2, 9);
+  // Dedicated real-time topic on ntfy.sh (Supports WebSockets, SSE, and 12-hour history caching)
+  const NTFY_TOPIC = "supbro_fun_brotherhood_irc_live_v2";
+  const NTFY_SSE_URL = `https://ntfy.sh/${NTFY_TOPIC}/sse?since=2h`;
+  const NTFY_POST_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
 
-  // Random nickname if not already picked
-  let myNick = localStorage.getItem('brother_irc_nick') || ('Bro_' + Math.floor(100 + Math.random() * 900));
+  // Use sessionStorage so each window/tab gets its own unique identity & nick
+  let mySessionId = sessionStorage.getItem('brother_session_id');
+  if (!mySessionId) {
+    mySessionId = 'usr_' + Math.random().toString(36).substring(2, 9);
+    sessionStorage.setItem('brother_session_id', mySessionId);
+  }
+
+  let myNick = sessionStorage.getItem('brother_irc_nick');
+  if (!myNick) {
+    myNick = 'Bro_' + Math.floor(100 + Math.random() * 900);
+    sessionStorage.setItem('brother_irc_nick', myNick);
+  }
+
   if (nickInput) nickInput.value = myNick;
   if (currentUserNick) currentUserNick.textContent = `+${myNick} [You]`;
 
+  // Track online peers
+  const activePeers = new Map<string, { nick: string; lastSeen: number }>();
+
+  function updateOnlineNicklist() {
+    if (!visitorsNicklist) return;
+    const now = Date.now();
+    // Clean up peers older than 3 minutes
+    for (const [sid, info] of activePeers.entries()) {
+      if (now - info.lastSeen > 180000) {
+        activePeers.delete(sid);
+      }
+    }
+
+    let html = `<li class="text-blue-800 font-bold">+${escapeHtml(myNick)} [You]</li>`;
+    for (const [sid, info] of activePeers.entries()) {
+      if (sid !== mySessionId) {
+        html += `<li class="text-emerald-800 font-semibold">+${escapeHtml(info.nick)}</li>`;
+      }
+    }
+    visitorsNicklist.innerHTML = html;
+
+    if (onlineCountEl) {
+      const total = 7 + 1 + activePeers.size - (activePeers.has(mySessionId) ? 1 : 0);
+      onlineCountEl.textContent = `(${total} Online)`;
+    }
+  }
+
   nickInput?.addEventListener('input', () => {
     myNick = nickInput.value.trim() || 'AnonBro';
-    localStorage.setItem('brother_irc_nick', myNick);
-    if (currentUserNick) currentUserNick.textContent = `+${myNick} [You]`;
+    sessionStorage.setItem('brother_irc_nick', myNick);
+    updateOnlineNicklist();
   });
 
   const seenMessages = new Set<string>();
@@ -232,104 +279,129 @@ import { TOKEN_CONFIG } from '../data/brothers';
     );
   }
 
-  function appendChatMessage(id: string, nick: string, text: string, isSelf = false) {
+  function appendChatMessage(id: string, nick: string, text: string, isSelf = false, timestamp?: number) {
     if (!messagesBox || seenMessages.has(id)) return;
     seenMessages.add(id);
 
     const line = document.createElement('div');
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateObj = timestamp ? new Date(timestamp) : new Date();
+    const time = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     line.innerHTML = `<span class="text-[#555555]">[${time}]</span> <span class="${isSelf ? 'text-[#ffff55]' : 'text-[#55ffff]'} font-bold">&lt;${isSelf ? '+' : ''}${escapeHtml(nick)}&gt;</span> <span class="text-white">${escapeHtml(text)}</span>`;
     messagesBox.appendChild(line);
     messagesBox.scrollTop = messagesBox.scrollHeight;
   }
 
-  // --- Real-time Relay 1: Public WebSockets via PieSocket Free Demo API ---
-  let pieSocketChannel: any = null;
-  try {
-    if (typeof (window as any).PieSocket !== 'undefined') {
-      const pieSocket = new (window as any).PieSocket({
-        clusterId: "free.blr2",
-        apiKey: "d3j8K4oO0b6f9Gz2A5vP7sC1lE8rY6mN", // Free public testing API key
-        notifySelf: false
-      });
+  function handleIncomingPayload(payload: any) {
+    if (!payload || !payload.type) return;
 
-      pieSocket.subscribe('supbro-brotherhood-live').then((ch: any) => {
-        pieSocketChannel = ch;
-        if (syncStatus) syncStatus.textContent = '[WebSocket Active]';
-        ch.listen('chat_message', (payload: any) => {
-          if (payload && payload.id && payload.text && payload.nick) {
-            appendChatMessage(payload.id, payload.nick, payload.text, payload.senderId === mySessionId);
-          }
-        });
-      }).catch((e: any) => {
-        console.log('PieSocket connect note:', e);
-      });
+    if (payload.senderId && payload.nick) {
+      activePeers.set(payload.senderId, { nick: payload.nick, lastSeen: Date.now() });
+      updateOnlineNicklist();
     }
-  } catch(e) {
-    console.log('WS init note:', e);
+
+    if (payload.type === 'chat' && payload.id && payload.text && payload.nick) {
+      const isSelf = payload.senderId === mySessionId;
+      appendChatMessage(payload.id, payload.nick, payload.text, isSelf, payload.time);
+    }
   }
 
-  // --- Real-time Relay 2: Cross-Window localStorage event sync (guaranteed instant between windows) ---
+  // --- 1. Global Real-Time Stream via EventSource (SSE) from ntfy.sh ---
+  let evtSource: EventSource | null = null;
+
+  function connectGlobalStream() {
+    try {
+      if (evtSource) evtSource.close();
+      evtSource = new EventSource(NTFY_SSE_URL);
+
+      evtSource.onopen = () => {
+        if (syncStatus) syncStatus.textContent = '[Global Live Relay: ONLINE]';
+        // Announce presence
+        broadcastPayload({
+          type: 'presence',
+          senderId: mySessionId,
+          nick: myNick,
+          time: Date.now()
+        });
+      };
+
+      evtSource.onmessage = (event) => {
+        try {
+          const outer = JSON.parse(event.data);
+          if (outer && outer.event === 'message' && outer.message) {
+            const payload = JSON.parse(outer.message);
+            handleIncomingPayload(payload);
+          }
+        } catch (err) {}
+      };
+
+      evtSource.onerror = () => {
+        if (syncStatus) syncStatus.textContent = '[Reconnecting Stream...]';
+      };
+    } catch (e) {
+      console.error('SSE Error:', e);
+    }
+  }
+
+  connectGlobalStream();
+
+  // --- 2. Instant Local Fallback (BroadcastChannel + storage event) ---
+  const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('starknet_brother_live_irc_v2') : null;
+  if (bc) {
+    bc.onmessage = (e) => handleIncomingPayload(e.data);
+  }
+
   window.addEventListener('storage', (e) => {
-    if (e.key === 'starknet_brother_live_sync' && e.newValue) {
+    if (e.key === 'starknet_brother_live_sync_v2' && e.newValue) {
       try {
-        const payload = JSON.parse(e.newValue);
-        if (payload && payload.id && payload.text && payload.nick) {
-          appendChatMessage(payload.id, payload.nick, payload.text, payload.senderId === mySessionId);
-        }
+        handleIncomingPayload(JSON.parse(e.newValue));
       } catch (err) {}
     }
   });
 
-  // --- Real-time Relay 3: BroadcastChannel (same browser different tabs/windows) ---
-  const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('starknet_brother_live_irc') : null;
-  if (bc) {
-    bc.onmessage = (e) => {
-      if (e.data && e.data.id && e.data.text && e.data.nick) {
-        appendChatMessage(e.data.id, e.data.nick, e.data.text, e.data.senderId === mySessionId);
-      }
-    };
+  function broadcastPayload(payload: any) {
+    // 1. Local cross-window storage & BroadcastChannel
+    try {
+      localStorage.setItem('starknet_brother_live_sync_v2', JSON.stringify(payload));
+      if (bc) bc.postMessage(payload);
+    } catch (e) {}
+
+    // 2. Global HTTP POST to ntfy.sh relay (broadcasts to all connected SSE clients worldwide)
+    fetch(NTFY_POST_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }).catch(() => {});
   }
 
-  // Send message
+  // Send message action
   function sendChatMessage() {
     if (!msgInput) return;
     const text = msgInput.value.trim();
     if (!text) return;
 
     const nick = (nickInput?.value.trim()) || myNick;
-    const msgId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+    myNick = nick;
+    sessionStorage.setItem('brother_irc_nick', myNick);
 
-    // 1. Show locally immediately
-    appendChatMessage(msgId, nick, text, true);
+    const msgId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+    const now = Date.now();
+
+    // Render locally immediately
+    appendChatMessage(msgId, nick, text, true, now);
+    updateOnlineNicklist();
 
     const payload = {
+      type: 'chat',
       id: msgId,
       nick: nick,
       text: text,
       senderId: mySessionId,
-      time: Date.now()
+      time: now
     };
 
-    // 2. Broadcast via localStorage (triggers 'storage' event across ALL other windows immediately)
-    localStorage.setItem('starknet_brother_live_sync', JSON.stringify(payload));
-
-    // 3. Broadcast via BroadcastChannel
-    if (bc) {
-      bc.postMessage(payload);
-    }
-
-    // 4. Broadcast via WebSocket if connected
-    if (pieSocketChannel) {
-      try {
-        pieSocketChannel.publish('chat_message', payload);
-      } catch(e) {}
-    }
+    broadcastPayload(payload);
 
     msgInput.value = '';
-
-    // Bot triggers
     triggerBotReply(text);
   }
 
@@ -340,19 +412,12 @@ import { TOKEN_CONFIG } from '../data/brothers';
       setTimeout(() => {
         const id = 'bot_' + Date.now();
         appendChatMessage(id, 'Bot_Starkscan', `Official $BROTHER CA: ${contractAddress}`, false);
-      }, 1000);
+      }, 800);
     } else if (upper.includes('PRICE') || upper.includes('PUMP')) {
       setTimeout(() => {
         const id = 'bot_' + Date.now();
         appendChatMessage(id, 'Bot_Avnu', 'Check live charts on DexScreener or GeckoTerminal. 100% Unruggable liquidity!', false);
-      }, 1200);
-    } else if (upper.includes('GM') || upper.includes('HI') || upper.includes('HELLO')) {
-      setTimeout(() => {
-        const bots = ['Maxx', 'Yoyo', 'Sam', 'OneFarmer'];
-        const chosen = bots[Math.floor(Math.random() * bots.length)];
-        const id = 'bot_' + Date.now();
-        appendChatMessage(id, chosen, 'GM brother! Welcome to the revolution.', false);
-      }, 1500);
+      }, 1000);
     }
   }
 
